@@ -1,0 +1,127 @@
+{
+       "S2_calibration_stance":
+    {
+    "MARKERS_TO_REMOVE": ["Unlabeled 1446", "stick", "Unlabeled 1450", "Unlabeled 1455", "Unlabeled 1457", "Unlabeled 1451", "Unlabeled 1454", "Unlabeled 1453", "Unlabeled 1449", "Unlabeled 1452", "Unlabeled 1456"],
+    "ELBOW_MARKER": ["Unlabeled 1448"],
+    "STONE_MARKER": []
+    },
+    "S2_force":
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": [],
+    "STONE_MARKER": []
+    },
+   
+    "S2_down_long":
+    {
+    "MARKERS_TO_REMOVE": ["Unlabeled 1126", "Unlabeled 1127", "Unlabeled 1131", "Unlabeled 1140"],
+    "ELBOW_MARKER": ["Unlabeled 1125"],
+    "STONE_MARKER": ["Unlabeled 1139"]
+    },
+        "S2_down_short":
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": [],
+    "STONE_MARKER": []
+    },
+        "S2_up_long":
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": [],
+    "STONE_MARKER": []
+    },
+        "S2_up_short":
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": [],
+    "STONE_MARKER": []
+    },
+
+
+
+    "S1_calibration_stance":
+    {
+    "MARKERS_TO_REMOVE": ["Unlabeled 1412", "Unlabeled 1408", "Unlabeled 1405", "Unlabeled 1406", "Unlabeled 1407", "Unlabeled 1410"],
+    "ELBOW_MARKER": ["Unlabeled 1411"],
+    "RIGHT_HAND_ADD_MARKER": ["Unlabeled 1409"],
+    "STONE_MARKER": []
+    },
+    "S1_force":
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": [],
+    "STONE_MARKER": []
+    },
+
+        "S1_down_long":
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": ["Unlabeled 1304"],
+    "STONE_MARKER": ["Unlabeled 1305"],
+    "HAND_MARKER": ["Unlabeled 1329"]
+    },
+        "S1_down_short":
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": [],
+    "STONE_MARKER": []
+    },
+        "S1_up_long":
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": [],
+    "STONE_MARKER": []
+    },
+        "S1_up_short":
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": [],
+    "STONE_MARKER": [],
+    "HAND_MARKER": []
+    },
+
+
+
+    "S3_calibration_stance":
+    {
+    "MARKERS_TO_REMOVE": ["Unlabeled 1488"],
+    "ELBOW_MARKER": ["Unlabeled 1490"],
+    "RIGHT_HAND_ADD_MARKER": [],
+    "STONE_MARKER": []
+    },
+    "S3_force":
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": [],
+    "STONE_MARKER": []
+    },
+    
+        "S3_down_long":
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": ["Unlabeled 1218"],
+    "STONE_MARKER": ["Unlabeled 1222"]
+    },
+        "S3_down_short":
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": [],
+    "STONE_MARKER": []
+    },
+
+        "S3_up_long":
+
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": [],
+    "STONE_MARKER": []
+    },
+
+        "S3_up_short":
+    {
+    "MARKERS_TO_REMOVE": [],
+    "ELBOW_MARKER": ["Unlabeled 3718"],
+    "STONE_MARKER": ["Unlabeled 3716"],
+    "HAND_MARKER": ["Unlabeled 1717"]
+    }
+}

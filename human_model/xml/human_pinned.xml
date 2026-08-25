@@ -1,0 +1,205 @@
+<mujoco model="human_36dof_ISB_model">
+  <default>
+    <default class="robot">
+      <default class="motor">
+        <joint />
+        <motor />
+      </default>
+      <default class="visual">
+        <geom material="visualgeom" contype="0" conaffinity="0" group="2" />
+      </default>
+      <default class="collision">
+        <geom material="collision_material" condim="3" contype="0" conaffinity="1" priority="1" group="1" solref="0.005 1" solimp="0.99 0.999 1e-05" friction="1 0.01 0.01" />
+      </default>
+    </default>
+  </default>
+
+  <compiler angle="radian" />
+
+  <asset>
+    <material name="body_color" rgba="0.0 0.0 0.8 0.3" />
+    <material name="body_color_R" rgba="0.8 0.0 0.0 0.6" />
+    <material name="body_color_L" rgba="0.0 0.8 0.0 0.6" />
+    <material name="default_material" rgba="0.7 0.7 0.7 1" />
+    <material name="collision_material" rgba="1.0 0.28 0.1 0.9" />
+    <mesh name="pelvis_mesh.STL" file="../meshes/pelvis_mesh.STL" scale="0.0063 0.0058 0.0058" />
+    <mesh name="upperleg_mesh.STL" file="../meshes/upperleg_mesh.STL" scale="0.0062 0.0064 0.0069" />
+    <mesh name="lowerleg_mesh.STL" file="../meshes/lowerleg_mesh.STL" scale="0.0063 0.0066 0.007" />
+    <mesh name="knee_mesh.STL" file="../meshes/knee_mesh.STL" scale="0.0056 0.0056 0.0056" />
+    <mesh name="foot_mesh.STL" file="../meshes/foot_mesh.STL" scale="0.0067 0.0067 0.0067" />
+    <mesh name="abdomen_mesh.STL" file="../meshes/abdomen_mesh.STL" scale="0.0074 0.0074 0.0074" />
+    <mesh name="torso_mesh.STL" file="../meshes/torso_mesh.STL" scale="0.007 0.007 0.007" />
+    <mesh name="head_mesh.STL" file="../meshes/head_mesh.STL" scale="0.0056 0.0056 0.0056" />
+    <mesh name="neck_mesh.STL" file="../meshes/neck_mesh.STL" scale="0.005 0.005 0.005" />
+    <mesh name="shoulder_mesh.STL" file="../meshes/shoulder_mesh.STL" scale="0.0039 0.0039 0.0039" />
+    <mesh name="upperarm_mesh.STL" file="../meshes/upperarm_mesh.STL" scale="0.0063 0.006 0.0069" />
+    <mesh name="lowerarm_mesh.STL" file="../meshes/lowerarm_mesh.STL" scale="0.0064 0.0064 0.0064" />
+    <mesh name="elbow_mesh.STL" file="../meshes/elbow_mesh.STL" scale="0.0055 0.0055 0.0055" />
+    <mesh name="hand_mesh.STL" file="../meshes/hand_mesh.STL" scale="0.0061 0.0061 0.0061" />
+  </asset>
+
+  <worldbody>
+    <body name="middle_pelvis" pos="0 0 1.05" childclass="robot" euler="1.57 0 0">
+      <geom name="middle_pelvis_visual" pos="0.0 -0.05 0.0" quat="1.0 0.0 0.0 0.0" material="body_color" type="mesh" mesh="pelvis_mesh.STL" class="visual" />
+      <body name="left_upperleg_virtual" pos="0.023 -0.1 -0.082" quat="1.0 0.0 0.0 0.0">
+        <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+        <body name="left_upperleg_virtual_2" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+          <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+          <body name="left_upperleg" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+            <inertial pos="-0.018 -0.188 0.014" quat="1.0 0.0 0.0 0.0" mass="9.22" diaginertia="0.1497 0.04005 0.1602" />
+            <geom name="left_upperleg_visual" pos="0 -0.05 0.0" quat="1.0 0.0 0.0 0.0" material="body_color_L" type="mesh" mesh="upperleg_mesh.STL" class="visual" />
+            <body name="left_lowerleg" pos="0. -0.439 0." quat="1.0 0.0 0.0 0.0">
+              <inertial pos="-0.021 -0.181 0.003" quat="1.0 0.0 0.0 0.0" mass="3.6" diaginertia="0.05471 0.00698 0.05471" />
+              <geom name="left_lowerleg_visual_0" pos="-0.0 -0.0 0.0" quat="1.0 0.0 0.0 0.0" material="body_color_L" type="mesh" mesh="lowerleg_mesh.STL" class="visual" />
+              <geom name="left_lowerleg_visual_1" pos="-0.0 0.0 -0.0" quat="1.0 0.0 0.0 0.0" material="body_color_L" type="mesh" mesh="knee_mesh.STL" class="visual" />
+              <body name="left_foot_virtual" pos="0 -0.44 0" quat="1.0 0.0 0.0 0.0">
+                <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+                <body name="left_foot" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                  <inertial pos="0.068 -0.027 0.005" quat="1.0 0.0 0.0 0.0" mass="0.9" diaginertia="0.00081 0.00385 0.00364" />
+                  <geom name="left_foot_visual" pos="-0.0 -0.0 0.00" quat="1.0 0.0 0.0 0.0" material="body_color_L" type="mesh" mesh="foot_mesh.STL" class="visual" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="middle_abdomen_virtual" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+        <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+        <body name="middle_abdomen" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+          <inertial pos="-0.008 0.1 0.0" quat="1.0 0.0 0.0 0.0" mass="12.25" diaginertia="0.04427 0.03796 0.04761" />
+          <geom name="middle_abdomen_visual" pos="-0.0 0.0 -0.0" quat="1.0 0.0 0.0 0.0" material="body_color" type="mesh" mesh="abdomen_mesh.STL" class="visual" />
+          <body name="middle_thorax_virtual" pos="0 0.223 0" quat="1.0 0.0 0.0 0.0">
+            <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+            <body name="middle_thorax_virtual_2" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+              <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+              <body name="middle_thorax" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                <inertial pos="-0.009 0.127 -0.001" quat="1.0 0.0 0.0 0.0" mass="11.97" diaginertia="0.05463 0.04683 0.05875" />
+                <geom name="middle_thorax_visual" pos="-0.0 -0.32 0.0" quat="1.0 0.0 0.0 0.0" material="body_color" type="mesh" mesh="torso_mesh.STL" class="visual" />
+                <body name="middle_head_virtual" pos="0 0.25 0" quat="1.0 0.0 0.0 0.0">
+                  <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+                  <body name="middle_head_virtual_2" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                    <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+                    <body name="middle_head" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                      <inertial pos="-0.015 0.131 0.0" quat="1.0 0.0 0.0 0.0" mass="5.03" diaginertia="0.02688 0.01748 0.03046" />
+                      <geom name="middle_head_visual_0" pos="-0.0 0.00 -0.00" quat="1.0 0.0 0.0 0.0" material="body_color" type="mesh" mesh="head_mesh.STL" class="visual" />
+                      <geom name="middle_head_visual_1" pos="-0.0 0.00 -0.00" quat="1.0 0.0 0.0 0.0" material="body_color" type="mesh" mesh="neck_mesh.STL" class="visual" />
+                    </body>
+                  </body>
+                </body>
+                <body name="left_clavicle" pos="0 0.176 0" quat="1.0 0.0 0.0 0.0">
+                  <inertial pos="-0.011096 0.00637 0.05417" quat="1.0 0.0 0.0 0.0" mass="0.15600" diaginertia="0.00024 0.00026 4e-05" />
+                  <body name="left_upperarm_virtual" pos="0.008 -0.075 -0.21" quat="1.0 0.0 0.0 0.0">
+                    <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+                    <body name="left_upperarm_virtual_2" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                      <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+                      <body name="left_upperarm" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                        <inertial pos="0.005 -0.125 -0.007" quat="1.0 0.0 0.0 0.0" mass="1.8" diaginertia="0.01314 0.00268 0.014" />
+                        <geom name="left_upperarm_visual_0" pos="-0.0 0.00 -0.00" quat="1.0 0.0 0.0 0.0" material="body_color_L" type="mesh" mesh="shoulder_mesh.STL" class="visual" />
+                        <geom name="left_upperarm_visual_1" pos="-0.0 0.05 -0.00" quat="1.0 0.0 0.0 0.0" material="body_color_L" type="mesh" mesh="upperarm_mesh.STL" class="visual" />
+                        <body name="left_lowerarm_virtual" pos="0 -0.276 0" quat="1.0 0.0 0.0 0.0">
+                          <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+                          <body name="left_lowerarm" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                            <inertial pos="0.003 -0.12 0.004" quat="1.0 0.0 0.0 0.0" mass="1.28" diaginertia="0.00825 0.00127 0.00767" />
+                            <geom name="left_lowerarm_visual_0" pos="-0.0 0.00 -0.00" quat="1.0 0.0 0.0 0.0" material="body_color_L" type="mesh" mesh="lowerarm_mesh.STL" class="visual" />
+                            <geom name="left_lowerarm_visual_1" pos="-0.0 0.00 -0.00" quat="1.0 0.0 0.0 0.0" material="body_color_L" type="mesh" mesh="elbow_mesh.STL" class="visual" />
+                            <body name="left_hand_virtual" pos="0 -0.287 0" quat="1.0 0.0 0.0 0.0">
+                              <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+                              <body name="left_hand" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                                <inertial pos="0.015 -0.153 0.014" quat="1.0 0.0 0.0 0.0" mass="0.45" diaginertia="0.00558 0.00216 0.0047" />
+                                <geom name="left_hand_visual" pos="-0.0 0.00 -0.00" quat="1.0 0.0 0.0 0.0" material="body_color_L" type="mesh" mesh="hand_mesh.STL" class="visual" />
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+                <body name="right_clavicle" pos="0 0.176 0" quat="1.0 0.0 0.0 0.0">
+                  <joint name="right_clavicle_joint_X" type="hinge" ref="0.0" class="motor" range="-0.349066 1.0472" axis="-1 0 0" />
+                  <inertial pos="-0.011096 0.00637 0.05417" quat="1.0 0.0 0.0 0.0" mass="0.15600" diaginertia="0.00024 0.00026 4e-05" />
+                  <body name="right_upperarm_virtual" pos="0.008 -0.075 0.21" quat="1.0 0.0 0.0 0.0">
+                    <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" /><joint name="right_shoulder_Z" type="hinge" ref="0.0" class="motor" range="-3.14159 3.14159" axis="0 0 1" />
+                    <body name="right_upperarm_virtual_2" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                      <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" /><joint name="right_shoulder_X" type="hinge" ref="0.0" class="motor" range="-1.0472 3.14159" axis="-1 0 0" />
+                      <body name="right_upperarm" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                        <joint name="right_shoulder_Y" type="hinge" ref="0.0" class="motor" range="-1.5708 3.14159" axis="0 1 0" />
+                        <inertial pos="0.005 -0.125 -0.007" quat="1.0 0.0 0.0 0.0" mass="1.8" diaginertia="0.01314 0.00268 0.014" />
+                        <geom name="right_upperarm_visual_0" pos="-0.0 0.0 -0.0" quat="1.0 0.0 0.0 0.0" material="body_color_R" type="mesh" mesh="shoulder_mesh.STL" class="visual" />
+                        <geom name="right_upperarm_visual_1" pos="-0.0 0.05 -0.00" quat="1.0 0.0 0.0 0.0" material="body_color_R" type="mesh" mesh="upperarm_mesh.STL" class="visual" />
+                        <body name="right_lowerarm_virtual" pos="0 -0.276 0" quat="1.0 0.0 0.0 0.0">
+                          <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" /><joint name="right_elbow_Z" type="hinge" ref="0.0" class="motor" range="0 2.617991667" axis="0 0 1" />
+                          <body name="right_lowerarm" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                            <joint name="right_elbow_Y" type="hinge" ref="0.0" class="motor" range="-0.349066 3.14159" axis="0 1 0" />
+                            <inertial pos="0.003 -0.12 0.004" quat="1.0 0.0 0.0 0.0" mass="1.28" diaginertia="0.00825 0.00127 0.00767" />
+                            <geom name="right_lowerarm_visual_0" pos="-0.0 0.00 -0.00" quat="1.0 0.0 0.0 0.0" material="body_color_R" type="mesh" mesh="lowerarm_mesh.STL" class="visual" />
+                            <geom name="right_lowerarm_visual_1" pos="-0.0 0.00 -0.00" quat="1.0 0.0 0.0 0.0" material="body_color_R" type="mesh" mesh="elbow_mesh.STL" class="visual" />
+                            <body name="right_hand_virtual" pos="0 -0.287 0" quat="1.0 0.0 0.0 0.0">
+                              <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" /><joint name="right_wrist_Z" type="hinge" ref="0.0" class="motor" range="-1.5708 1.5708" axis="0 0 1" />
+                              <body name="right_hand" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                                <site name="right_hand_site" pos="0 0 0" size="0.01" type="sphere" rgba="1 0 0 1"/>
+
+                                <joint name="right_wrist_X" type="hinge" ref="0.0" class="motor" range="-0.785398 0.785398" axis="-1 0 0" />
+                                <inertial pos="0.015 -0.153 0.014" quat="1.0 0.0 0.0 0.0" mass="0.45" diaginertia="0.00558 0.00216 0.0047" />
+                                <geom name="right_hand_visual" pos="-0.0 0.00 -0.00" quat="1.0 0.0 0.0 0.0" material="body_color_R" type="mesh" mesh="hand_mesh.STL" class="visual" />
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="right_upperleg_virtual" pos="0.023 -0.1 0.082" quat="1.0 0.0 0.0 0.0">
+        <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+        <body name="right_upperleg_virtual_2" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+          <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+          <body name="right_upperleg" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+            <inertial pos="-0.018 -0.188 0.014" quat="1.0 0.0 0.0 0.0" mass="9.22" diaginertia="0.1497 0.04005 0.1602" />
+            <geom name="right_upperleg_visual" pos="-0.0 -0.05 -0.00" quat="1.0 0.0 0.0 0.0" material="body_color_R" type="mesh" mesh="upperleg_mesh.STL" class="visual" />
+            <body name="right_lowerleg" pos="0 -0.439 0" quat="1.0 0.0 0.0 0.0">
+              <inertial pos="-0.021 -0.181 0.003" quat="1.0 0.0 0.0 0.0" mass="3.6" diaginertia="0.05471 0.00698 0.05471" />
+              <geom name="right_lowerleg_visual_0" pos="-0.0 0.00 -0.00" quat="1.0 0.0 0.0 0.0" material="body_color_R" type="mesh" mesh="lowerleg_mesh.STL" class="visual" />
+              <geom name="right_lowerleg_visual_1" pos="-0.0 0.0 -0.0" quat="1.0 0.0 0.0 0.0" material="body_color_R" type="mesh" mesh="knee_mesh.STL" class="visual" />
+              <body name="right_foot_virtual" pos="0 -0.44 0" quat="1.0 0.0 0.0 0.0">
+                <inertial pos="0 0 0" mass="0.01" diaginertia="1e-5 1e-5 1e-5" />
+                <body name="right_foot" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                  <inertial pos="0.068 -0.027 0.005" quat="1.0 0.0 0.0 0.0" mass="0.9" diaginertia="0.00081 0.00385 0.00364" />
+                  <geom name="right_foot_visual" pos="-0.00 -0.00 0.00" quat="1.0 0.0 0.0 0.0" material="body_color_R" type="mesh" mesh="foot_mesh.STL" class="visual" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <site name="middle_pelvis_site" pos="0 0 0" quat="1 0 0 0" />
+      <camera name="front_camera" mode="track" fovy="90.0" quat="4.329780281177467e-17 4.329780281177466e-17 0.7071067811865475 0.7071067811865476" pos="0.0 2.0 0.5" />
+      <camera name="side_camera" mode="track" fovy="90.0" quat="-0.5 -0.4999999999999999 0.5 0.5000000000000001" pos="-2.0 0.0 0.5" />
+    </body>
+  </worldbody>
+
+  <actuator>
+   
+    <motor name="right_clavicle_joint_X_ctrl" joint="right_clavicle_joint_X" class="motor" />
+    <motor name="right_shoulder_Z_ctrl" joint="right_shoulder_Z" class="motor" />
+    <motor name="right_shoulder_X_ctrl" joint="right_shoulder_X" class="motor" />
+    <motor name="right_shoulder_Y_ctrl" joint="right_shoulder_Y" class="motor" />
+    <motor name="right_elbow_Z_ctrl" joint="right_elbow_Z" class="motor" />
+    <motor name="right_elbow_Y_ctrl" joint="right_elbow_Y" class="motor" />
+    <motor name="right_wrist_Z_ctrl" joint="right_wrist_Z" class="motor" />
+    <motor name="right_wrist_X_ctrl" joint="right_wrist_X" class="motor" />
+  </actuator>
+
+  <sensor>
+    <framepos name="middle_pelvis_site_pos" objtype="site" objname="middle_pelvis_site" />
+    <framequat name="middle_pelvis_site_quat" objtype="site" objname="middle_pelvis_site" />
+    <framelinvel name="middle_pelvis_site_linvel" objtype="site" objname="middle_pelvis_site" />
+    <frameangvel name="middle_pelvis_site_angvel" objtype="site" objname="middle_pelvis_site" />
+    <velocimeter name="middle_pelvis_site_vel" site="middle_pelvis_site" />
+  </sensor>
+</mujoco>

@@ -1,0 +1,575 @@
+<robot name="chimp_upperlimb">
+    <material name="body_color">
+        <color rgba="0.0 0.0 0.8 0.3" />
+    </material>
+    <material name="body_color_R">
+        <color rgba="0.8 0.0 0.0 0.6" />
+    </material>
+     <material name="body_color_L">
+        <color rgba="0.0 0.8 0.0 0.6" />
+    </material>
+    <link name="middle_pelvis">
+        <inertial>
+            <mass value="10.65" />
+            <origin xyz="0.03 -0.025 -0.001" rpy="0 -0 0" />
+            <inertia ixx="0.08977" ixy="-0.0055" ixz="-0.00127" iyy="0.09888" iyz="-0.00056" izz="0.07942" />
+        </inertial>
+        <visual>
+	        <origin xyz="0 -0.045813 0" rpy="0 0 0" />
+            <geometry>
+		        <mesh filename="meshes/pelvis_mesh.STL" scale="0.00577244 0.00531431 0.00531431" />
+            </geometry>
+            <material name="body_color" />
+        </visual>
+    </link>
+    <joint name="left_hip_Z" type="revolute">
+        <origin xyz="0.023 -0.091626 -0.082" rpy="0 -0 0" />
+        <axis xyz="0 0 1" />
+        <parent link="middle_pelvis" />
+        <child link="left_upperleg_virtual" />
+        <limit effort="185" velocity="12.0" lower="-1.047196667" upper="3.14159" />
+    </joint>
+    <link name="left_upperleg_virtual" />
+    <joint name="left_hip_X" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="1 0 0" />
+        <parent link="left_upperleg_virtual" />
+        <child link="left_upperleg_virtual_2" />
+        <limit effort="120" velocity="12.0" lower="-1.047196667" upper="1.570795" />
+    </joint>
+    <link name="left_upperleg_virtual_2" />
+    <joint name="left_hip_Y" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="0 -1 0" />
+        <parent link="left_upperleg_virtual_2" />
+        <child link="left_upperleg" />
+        <limit effort="60" velocity="12.0" lower="-1.570795" upper="1.047196667" />
+    </joint>
+    <link name="left_upperleg">
+        <inertial>
+            <mass value="9.22" />
+            <origin xyz="-0.018 -0.188 0.014" rpy="0 -0 0" />
+            <inertia ixx="0.1497" ixy="0.00872" ixz="-0.00071" iyy="0.04005" iyz="-0.00872" izz="0.1602" />
+        </inertial>
+        <visual>
+            <origin xyz="0 -0.045813 0" rpy="0.0 0 0" />
+            <geometry>
+                <mesh filename="meshes/upperleg_mesh.STL" scale="0.00568081 0.00586407 0.0063222" />
+            </geometry>
+            <material name="body_color_L" />
+        </visual>
+    </link>
+    <joint name="left_knee_Z" type="revolute">
+        <origin xyz="0 -0.402238 0" rpy="0 -0 0" />
+        <axis xyz="0 0 -1" />
+        <parent link="left_upperleg" />
+        <child link="left_lowerleg" />
+        <limit effort="130" velocity="18.6" lower="-0.035" upper="3.14159" />
+    </joint>
+    <link name="left_lowerleg">
+        <inertial>
+            <mass value="3.6" />
+            <origin xyz="-0.021 -0.181 0.003" rpy="0 -0 0" />
+            <inertia ixx="0.05471" ixy="0.00112" ixz="0.00028" iyy="0.00698" iyz="0.00174" izz="0.05471" />
+        </inertial>
+        <visual>
+            <origin xyz="-0 -0 0" rpy="0.0 0.0 0" />
+            <geometry>
+                <mesh filename="meshes/lowerleg_mesh.STL" scale="0.00577244 0.00604732 0.00641382" />
+            </geometry>
+            <material name="body_color_L" />
+	    </visual>
+        <visual>
+            <origin xyz="-0 0 -0" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="meshes/knee_mesh.STL" scale="0.00513106 0.00513106 0.00513106" />
+            </geometry>
+            <material name="body_color_L" />
+        </visual>
+    </link>
+    <joint name="left_ankle_Z" type="revolute">
+        <origin xyz="0 -0.403155 0" rpy="0 -0 0" />
+        <axis xyz="0 0 1" />
+        <parent link="left_lowerleg" />
+        <child link="left_foot_virtual" />
+        <limit effort="126" velocity="12.7" lower="-1.570795" upper="0.7853975" />
+    </joint>
+    <link name="left_foot_virtual" />
+    <joint name="left_ankle_X" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="-1 0 0" />
+        <parent link="left_foot_virtual" />
+        <child link="left_foot" />
+        <limit effort="20" velocity="2.0" lower="-0.523598333" upper="0.785398" />
+    </joint>
+    <link name="left_foot">
+        <inertial>
+            <mass value="0.9" />
+            <origin xyz="0.068 -0.027 0.005" rpy="0 -0 0" />
+            <inertia ixx="0.00081" ixy="0.00048" ixz="-0.00018" iyy="0.00385" iyz="0.0" izz="0.00364" />
+        </inertial>
+        <visual>
+            <origin xyz="-0 -0 0" rpy="0 0 0" />
+            <geometry>
+		        <mesh filename="meshes/foot_mesh.STL" scale="0.00613894 0.00613894 0.00613894" />
+                
+            </geometry>
+            <material name="body_color_L" />
+        </visual>
+    </link>
+    <joint name="middle_lumbar_Z" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="0 0 -1" />
+        <parent link="middle_pelvis" />
+        <child link="middle_abdomen_virtual" />
+        <limit effort="190" velocity="5.2" lower="-0.785398" upper="3.14159" />
+    </joint>
+    <link name="middle_abdomen_virtual" />
+    <joint name="middle_lumbar_X" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="1 0 0" />
+        <parent link="middle_abdomen_virtual" />
+        <child link="middle_abdomen" />
+        <limit effort="160" velocity="5.2" lower="-0.785398" upper="0.785398" />
+    </joint>
+    <link name="middle_abdomen">
+        <inertial>
+            <mass value="12.25" />
+            <origin xyz="-0.008 0.1 0.0" rpy="0 -0 0" />
+            <inertia ixx="0.04427" ixy="0.01968" ixz="-0.00024" iyy="0.03796" iyz="-0.00097" izz="0.04761" />
+        </inertial>
+        <visual>
+            <origin xyz="-0 0 -0" rpy="0 -0 0" />
+            <geometry>
+		        <mesh filename="meshes/abdomen_mesh.STL" scale="0.00745836 0.00678033 0.00745836" />
+                
+            </geometry>
+            <material name="body_color" />
+        </visual>
+    </link>
+    <joint name="middle_thoracic_Z" type="revolute">
+        <origin xyz="0 0.204326 0" rpy="0 -0 0" />
+        <axis xyz="0 0 -1" />
+        <parent link="middle_abdomen" />
+        <child link="middle_thorax_virtual" />
+        <limit effort="190" velocity="5.2" lower="-0.392699" upper="1.0472" />
+    </joint>
+    <link name="middle_thorax_virtual" />
+    <joint name="middle_thoracic_X" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="1 0 0" />
+        <parent link="middle_thorax_virtual" />
+        <child link="middle_thorax_virtual_2" />
+        <limit effort="190" velocity="5.2" lower="-1.0472" upper="1.0472" />
+    </joint>
+    <link name="middle_thorax_virtual_2" />
+    <joint name="middle_thoracic_Y" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="0 1 0" />
+        <parent link="middle_thorax_virtual_2" />
+        <child link="middle_thorax" />
+        <limit effort="185" velocity="2.0" lower="-1.0472" upper="1.0472" />
+    </joint>
+    <link name="middle_thorax">
+        <inertial>
+            <mass value="11.97" />
+            <origin xyz="-0.009 0.127 -0.001" rpy="0 -0 0" />
+            <inertia ixx="0.05463" ixy="0.02428" ixz="-0.0003" iyy="0.04683" iyz="-0.0012" izz="0.05875" />
+        </inertial>
+        <visual>
+	    <origin xyz="-0 -0.293203 0" rpy="0 -0 0" />
+            <geometry>
+		        
+		        <mesh filename="meshes/torso_mesh.STL" scale="0.0070552 0.00641382 0.0070552" />
+            </geometry>
+            <material name="body_color" />
+        </visual>
+    </link>
+    <joint name="middle_cervical_Z" type="revolute">
+        <origin xyz="0 0.229065 0" rpy="0 -0 0" />
+        <axis xyz="0 0 -1" />
+        <parent link="middle_thorax" />
+        <child link="middle_head_virtual" />
+        <limit effort="100" velocity="8.7" lower="-1.5708" upper="1.5708" />
+    </joint>
+    <link name="middle_head_virtual" />
+    <joint name="middle_cervical_X" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="1 0 0" />
+        <parent link="middle_head_virtual" />
+        <child link="middle_head_virtual_2" />
+        <limit effort="100" velocity="8.7" lower="-1.5708" upper="1.5708" />
+    </joint>
+    <link name="middle_head_virtual_2" />
+    <joint name="middle_cervical_Y" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="0 1 0" />
+        <parent link="middle_head_virtual_2" />
+        <child link="middle_head" />
+        <limit effort="100" velocity="8.7" lower="-1.5708" upper="1.5708" />
+    </joint>
+    <link name="middle_head">
+        <inertial>
+            <mass value="5.03" />
+            <origin xyz="-0.015 0.131 0.0" rpy="0 -0 0" />
+            <inertia ixx="0.02688" ixy="-0.00227" ixz="-0.00011" iyy="0.01748" iyz="0.00025" izz="0.03046" />
+        </inertial>
+        <visual>
+	        <origin xyz="-0 0 -0" rpy="0 -0 0" />
+            <geometry>
+		        <mesh filename="meshes/head_mesh.STL" scale="0.00513106 0.00513106 0.00513106" />
+            </geometry>
+            <material name="body_color" />
+        </visual>
+        <visual>
+	     <origin xyz="-0 0 -0" rpy="0 -0 0" />
+            <geometry>
+		        <mesh filename="meshes/neck_mesh.STL" scale="0.0045813 0.0045813 0.0045813" />
+            </geometry>
+            <material name="body_color" />
+        </visual>
+    </link>
+    <joint name="left_clavicle_joint_X" type="revolute">
+        <origin xyz="0 0.161262 0" rpy="0 -0 0" />
+        <axis xyz="1 0 0" />
+        <parent link="middle_thorax" />
+        <child link="left_clavicle" />
+        <limit effort="135" velocity="16.1" lower="-0.349066" upper="1.0472" />
+    </joint>
+    <link name="left_clavicle">
+        <inertial>
+            <mass value="0.15600" />
+            <origin xyz="-0.011096 0.00637 0.05417" rpy="0 -0 0" />
+            <inertia ixx="0.00024" ixy="-0.00002" ixz="-0.00007" iyy="0.00026" iyz="0.00005" izz="0.00004" />
+        </inertial>
+    </link>
+    <joint name="left_shoulder_Z" type="revolute">
+        <origin xyz="0.008 -0.0687195 -0.1722" rpy="0 0.174533 0" />
+        <axis xyz="0 0 1" />
+        <parent link="left_clavicle" />
+        <child link="left_upperarm_virtual" />
+        <limit effort="124.2" velocity="20.24" lower="-3.14159" upper="3.14159" />
+    </joint>
+    <link name="left_upperarm_virtual" />
+    <joint name="left_shoulder_X" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="1 0 0" />
+        <parent link="left_upperarm_virtual" />
+        <child link="left_upperarm_virtual_2" />
+        <limit effort="95.85" velocity="6.9" lower="-1.0472" upper="3.14159" />
+    </joint>
+    <link name="left_upperarm_virtual_2" />
+    <joint name="left_shoulder_Y" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="0 -1 0" />
+        <parent link="left_upperarm_virtual_2" />
+        <child link="left_upperarm" />
+        <limit effort="70.2" velocity="6.9" lower="-1.5708" upper="3.14159" />
+    </joint>
+    <link name="left_upperarm">
+        <inertial>
+            <mass value="2.1" />
+            <origin xyz="0.005 -0.125 -0.007" rpy="0 -0 0" />
+            <inertia ixx="0.01533" ixy="0.000571667" ixz="0.000396667" iyy="0.00312667" iyz="5.83333e-05" izz="0.0163333" />
+        </inertial>
+        <visual>
+	         <origin xyz="-0.0 0.00 -0.00" rpy="0 -0 0" />
+            <geometry>
+		        <mesh filename="meshes/shoulder_mesh.STL" scale="0.00357342 0.00357342 0.00357342" />
+            </geometry>
+            <material name="body_color_L" />
+        </visual>
+        <visual>
+            <origin xyz="-0.0 0.05 -0.00" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="meshes/upperarm_mesh.STL" scale="0.00650527 0.00656522 0.00712481" />
+            </geometry>
+            <material name="body_color_L" />
+        </visual>
+    </link>
+    <joint name="left_elbow_Z" type="revolute">
+        <origin xyz="0 -0.302 0" rpy="0 -0.20944 0" />
+        <axis xyz="0 0 1" />
+        <parent link="left_upperarm" />
+        <child link="left_lowerarm_virtual" />
+        <limit effort="103.95" velocity="22.885" lower="0" upper="2.617991667" />
+    </joint>
+    <link name="left_lowerarm_virtual" />
+    <joint name="left_elbow_Y" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="0 -1 0" />
+        <parent link="left_lowerarm_virtual" />
+        <child link="left_lowerarm" />
+        <limit effort="20.25" velocity="6.9" lower="-0.349066" upper="3.14159" />
+    </joint>
+    <link name="left_lowerarm">
+        <inertial>
+            <mass value="1.5" />
+            <origin xyz="0.003 -0.12 0.004" rpy="0 -0 0" />
+            <inertia ixx="0.00966797" ixy="0.000105469" ixz="4.6875e-05" iyy="0.00148828" iyz="-0.000785156" izz="0.00898828" />
+        </inertial>
+        <visual>
+            <origin xyz="-0.0 0.00 -0.00" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="meshes/lowerarm_mesh.STL" scale="0.00714298 0.00602091 0.00714298" />
+            </geometry>
+            <material name="body_color_L" />
+        </visual>
+        <visual>
+	        <origin xyz="-0.0 0.00 -0.00" rpy="0 -0 0" />
+            <geometry>
+		        <mesh filename="meshes/elbow_mesh.STL" scale="0.00503943 0.00503943 0.00503943" />
+            </geometry>
+            <material name="body_color_L" />
+        </visual>
+    </link>
+    <joint name="left_wrist_Z" type="revolute">
+        <origin xyz="0 -0.27 0" rpy="0 -0 0" />
+        <axis xyz="0 0 1" />
+        <parent link="left_lowerarm" />
+        <child link="left_hand_virtual" />
+        <limit effort="249.75" velocity="28.75" lower="-1.5708" upper="1.5708" />
+    </joint>
+    <link name="left_hand_virtual" />
+    <joint name="left_wrist_X" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="1 0 0" />
+        <parent link="left_hand_virtual" />
+        <child link="left_hand" />
+        <limit effort="135" velocity="6.9" lower="-0.785398" upper="0.785398" />
+    </joint>
+    <link name="left_hand">
+        <inertial>
+            <mass value="0.7" />
+            <origin xyz="0.015 -0.203732 0.014" rpy="0 -0 0" />
+            <inertia ixx="0.00868" ixy="0.00113556" ixz="0.000528889" iyy="0.00336" iyz="-0.000933333" izz="0.00731111" />
+        </inertial>
+        <visual>
+            <origin xyz="-0.0 0.00 -0.00" rpy="0 -0 0" />
+            <geometry>
+		        <mesh filename="meshes/hand_mesh.STL" scale="0.00659309 0.00812263 0.00659309" />
+                
+            </geometry>
+            <material name="body_color_L" />
+        </visual>
+    </link>
+    <joint name="right_clavicle_joint_X" type="revolute">
+        <origin xyz="0 0.161262 0" rpy="0 -0 0" />
+        <axis xyz="-1 0 0" />
+        <parent link="middle_thorax" />
+        <child link="right_clavicle" />
+        <limit effort="135" velocity="16.1" lower="-0.349066" upper="1.0472" />
+    </joint>
+    <link name="right_clavicle">
+        <inertial>
+            <mass value="0.15600" />
+            <origin xyz="-0.011096 0.00637 0.05417" rpy="0 -0 0" />
+            <inertia ixx="0.00024" ixy="-0.00002" ixz="-0.00007" iyy="0.00026" iyz="0.00005" izz="0.00004" />
+        </inertial>
+    </link>
+    <joint name="right_shoulder_Z" type="revolute">
+        <origin xyz="0.008 -0.0687195 0.1722" rpy="0 0.174533 0" />
+        <axis xyz="0 0 1" />
+        <parent link="right_clavicle" />
+        <child link="right_upperarm_virtual" />
+        <limit effort="124.2" velocity="20.24" lower="-3.14159" upper="3.14159" />
+    </joint>
+    <link name="right_upperarm_virtual" />
+    <joint name="right_shoulder_X" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="-1 0 0" />
+        <parent link="right_upperarm_virtual" />
+        <child link="right_upperarm_virtual_2" />
+        <limit effort="95.85" velocity="6.9" lower="-1.0472" upper="3.14159" />
+    </joint>
+    <link name="right_upperarm_virtual_2" />
+    <joint name="right_shoulder_Y" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="0 1 0" />
+        <parent link="right_upperarm_virtual_2" />
+        <child link="right_upperarm" />
+        <limit effort="70.2" velocity="6.9" lower="-1.5708" upper="3.14159" />
+    </joint>
+    <link name="right_upperarm">
+        <inertial>
+            <mass value="2.1" />
+            <origin xyz="0.005 -0.125 -0.007" rpy="0 -0 0" />
+            <inertia ixx="0.01533" ixy="0.000571667" ixz="0.000396667" iyy="0.00312667" iyz="5.83333e-05" izz="0.0163333" />
+        </inertial>
+        <visual>
+	        <origin xyz="-0.0 0.0 -0.0" rpy="0 -0 0" />
+            <geometry>
+		        <mesh filename="meshes/shoulder_mesh.STL" scale="0.00357342 0.00357342 0.00357342" />
+            </geometry>
+            <material name="body_color_R" />
+        </visual>
+        <visual>
+            <origin xyz="-0.0 0.05 -0.00" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="meshes/upperarm_mesh.STL" scale="0.00650527 0.00656522 0.00712481" />
+            </geometry>
+            <material name="body_color_R" />
+        </visual>
+    </link>
+    <joint name="right_elbow_Z" type="revolute">
+        <origin xyz="0 -0.302 0" rpy="0 -0.20944 0" />
+        <axis xyz="0 0 1" />
+        <parent link="right_upperarm" />
+        <child link="right_lowerarm_virtual" />
+        <limit effort="103.95" velocity="22.885" lower="0" upper="2.617991667" />
+    </joint>
+    <link name="right_lowerarm_virtual" />
+    <joint name="right_elbow_Y" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="0 1 0" />
+        <parent link="right_lowerarm_virtual" />
+        <child link="right_lowerarm" />
+        <limit effort="20.25" velocity="6.9" lower="-0.349066" upper="1.39626" />
+    </joint>
+    <link name="right_lowerarm">
+        <inertial>
+            <mass value="1.5" />
+            <origin xyz="0.003 -0.12 0.004" rpy="0 -0 0" />
+            <inertia ixx="0.00966797" ixy="0.000105469" ixz="4.6875e-05" iyy="0.00148828" iyz="-0.000785156" izz="0.00898828" />
+        </inertial>
+        <visual>
+            <origin xyz="-0.0 0.00 -0.00" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="meshes/lowerarm_mesh.STL" scale="0.00714298 0.00602091 0.00714298" />
+            </geometry>
+            <material name="body_color_R" />
+        </visual>
+        <visual>
+	        <origin xyz="-0.0 0.00 -0.00" rpy="0 -0 0" />
+            <geometry>
+		        <mesh filename="meshes/elbow_mesh.STL" scale="0.00503943 0.00503943 0.00503943" />
+            </geometry>
+            <material name="body_color_R" />
+        </visual>
+    </link>
+    <joint name="right_wrist_Z" type="revolute">
+        <origin xyz="0 -0.27 0" rpy="0 -0 0" />
+        <axis xyz="0 0 1" />
+        <parent link="right_lowerarm" />
+        <child link="right_hand_virtual" />
+        <limit effort="135" velocity="28.75" lower="-1.0472" upper="0.349066" />
+    </joint>
+    <link name="right_hand_virtual" />
+    <joint name="right_wrist_X" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="-1 0 0" />
+        <parent link="right_hand_virtual" />
+        <child link="right_hand" />
+        <limit effort="135" velocity="6.9" lower="-0.261799" upper="0.261799" />
+    </joint>
+    <link name="right_hand">
+        <inertial>
+            <mass value="0.7" />
+            <origin xyz="0.015 -0.203732 0.014" rpy="0 -0 0" />
+            <inertia ixx="0.00868" ixy="0.00113556" ixz="0.000528889" iyy="0.00336" iyz="-0.000933333" izz="0.00731111" />
+        </inertial>
+        <visual>
+            <origin xyz="-0.0 0.00 -0.00" rpy="0 -0 0" />
+            <geometry>
+		        <mesh filename="meshes/hand_mesh.STL" scale="0.00659309 0.00812263 0.00659309" />
+                
+            </geometry>
+            <material name="body_color_R" />
+        </visual>
+    </link>
+    <joint name="right_hip_Z" type="revolute">
+        <origin xyz="0.023 -0.091626 0.082" rpy="0 -0 0" />
+        <axis xyz="0 0 1" />
+        <parent link="middle_pelvis" />
+        <child link="right_upperleg_virtual" />
+        <limit effort="185" velocity="12.0" lower="-1.047196667" upper="3.14159" />
+    </joint>
+    <link name="right_upperleg_virtual" />
+    <joint name="right_hip_X" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="-1 0 0" />
+        <parent link="right_upperleg_virtual" />
+        <child link="right_upperleg_virtual_2" />
+        <limit effort="120" velocity="6.0" lower="-1.047196667" upper="1.570795" />
+    </joint>
+    <link name="right_upperleg_virtual_2" />
+    <joint name="right_hip_Y" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="0 1 0" />
+        <parent link="right_upperleg_virtual_2" />
+        <child link="right_upperleg" />
+        <limit effort="60" velocity="6.0" lower="-1.570795" upper="1.047196667" />
+    </joint>
+    <link name="right_upperleg">
+        <inertial>
+            <mass value="9.22" />
+            <origin xyz="-0.018 -0.188 0.014" rpy="0 -0 0" />
+            <inertia ixx="0.1497" ixy="0.00872" ixz="-0.00071" iyy="0.04005" iyz="-0.00872" izz="0.1602" />
+        </inertial>
+        <visual>
+            <origin xyz="-0 -0.045813 -0" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="meshes/upperleg_mesh.STL" scale="0.00568081 0.00586407 0.0063222" />
+            </geometry>
+            <material name="body_color_R" />
+        </visual>
+    </link>
+    <joint name="right_knee_Z" type="revolute">
+        <origin xyz="0 -0.402238 0" rpy="0 -0 0" />
+        <axis xyz="0 0 -1" />
+        <parent link="right_upperleg" />
+        <child link="right_lowerleg" />
+        <limit effort="130" velocity="18.6" lower="-0.035" upper="3.14159" />
+    </joint>
+    <link name="right_lowerleg">
+        <inertial>
+            <mass value="3.6" />
+            <origin xyz="-0.021 -0.181 0.003" rpy="0 -0 0" />
+            <inertia ixx="0.05471" ixy="0.00112" ixz="0.00028" iyy="0.00698" iyz="0.00174" izz="0.05471" />
+        </inertial>
+        <visual>
+            <origin xyz="-0 0 -0" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="meshes/lowerleg_mesh.STL" scale="0.00577244 0.00604732 0.00641382" />
+            </geometry>
+            <material name="body_color_R" />
+        </visual>
+        <visual>
+            <origin xyz="-0 0 -0" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="meshes/knee_mesh.STL" scale="0.00513106 0.00513106 0.00513106" />
+            </geometry>
+            <material name="body_color_R" />
+        </visual>
+    </link>
+    <joint name="right_ankle_Z" type="revolute">
+        <origin xyz="0 -0.403155 0" rpy="0 -0 0" />
+        <axis xyz="0 0 1" />
+        <parent link="right_lowerleg" />
+        <child link="right_foot_virtual" />
+        <limit effort="126" velocity="12.7" lower="-1.570795" upper="0.7853975" />
+    </joint>
+    <link name="right_foot_virtual" />
+    <joint name="right_ankle_X" type="revolute">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="1 0 0" />
+        <parent link="right_foot_virtual" />
+        <child link="right_foot" />
+        <limit effort="20" velocity="6.0" lower="-0.523598333" upper="0.785398" />
+    </joint>
+    <link name="right_foot">
+        <inertial>
+            <mass value="0.9" />
+            <origin xyz="0.068 -0.027 0.005" rpy="0 -0 0" />
+            <inertia ixx="0.00081" ixy="0.00048" ixz="-0.00018" iyy="0.00385" iyz="0.0" izz="0.00364" />
+        </inertial>
+        <visual>
+            <origin xyz="-0 -0 0" rpy="0 0 0" />
+            <geometry>
+		        <mesh filename="meshes/foot_mesh.STL" scale="0.00613894 0.00613894 0.00613894" />
+                
+            </geometry>
+            <material name="body_color_R" />
+        </visual>
+    </link>
+</robot>

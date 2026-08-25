@@ -1,0 +1,35 @@
+{
+  "S1": {
+    "calibration_frame": 100,
+    "torso_length": 0.16669171768492275,
+    "right_arm_length": 0.30537807950800927,
+    "left_arm_length": 0.30869171352823827,
+    "right_forearm_length": 0.22748787545933077,
+    "left_forearm_length": 0.2171117307401883,
+    "shoulder_half_width": 0.14927688950905962,
+    "pelvis_asis_half_width": 0.10207337166347549,
+    "pelvis_psis_half_width": 0.06594723461601705
+  },
+  "S2": {
+    "calibration_frame": 100,
+    "torso_length": 0.2639424571066581,
+    "right_arm_length": 0.36088840036914455,
+    "left_arm_length": 0.3494024039356342,
+    "right_forearm_length": 0.2497815630185702,
+    "left_forearm_length": 0.2510568514042188,
+    "shoulder_half_width": 0.18480228132993923,
+    "pelvis_asis_half_width": 0.1430085475784577,
+    "pelvis_psis_half_width": 0.05490383697657205
+  },
+  "S3": {
+    "calibration_frame": 100,
+    "torso_length": 0.22463401158662513,
+    "right_arm_length": 0.3641735709534671,
+    "left_arm_length": 0.37368351421222745,
+    "right_forearm_length": 0.27146987295278285,
+    "left_forearm_length": 0.27450770827246374,
+    "shoulder_half_width": 0.17881243824326093,
+    "pelvis_asis_half_width": 0.12060224602593436,
+    "pelvis_psis_half_width": 0.06731870693388277
+  }
+}

@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tool-handling"
+version = "0.0.0"
+description = "Contact-rich MO-IRL for stone-tool shaving across hominin morphologies"
+requires-python = ">=3.10"
+
+# Flat module layout under src/ — the repo's library code. Scripts in tests/,
+# results/, and experiments/ import these top-level modules. Run scripts from the
+# repo root so the cwd-relative data/output paths resolve. The flat py_modules
+# list is globbed dynamically in setup.py (packages.find can't see __init__-less
+# modules).

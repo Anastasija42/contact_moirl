@@ -1,0 +1,20 @@
+{
+    "S2": {
+        "id": "S2",
+        "height": 1.70,
+        "weight": 70,
+        "gender": "male"
+    },
+    "S3": {
+        "id": "S3",
+        "height": 1.76,
+        "weight": 77,
+        "gender": "male"    
+    },
+    "S1":{
+        "id": "S1",
+        "height": 1.63,
+        "weight": 59,
+        "gender": "female"
+    }
+}

@@ -1,0 +1,387 @@
+
+\subsection{Upper-limb Biomechanical Models}
+
+  All four models share a single base kinematic structure, the 36-DOF
+  ISB-convention whole-body model. Each model is obtained by applying a set of
+  targeted, literature-anchored modifications to the modern-human reference while leaving the joint topology unchanged. Edits fall
+  into four families: (i)~\emph{segment geometry} (link/joint origins encoding
+  bone lengths and orientations), (ii)~\emph{mass--inertia} properties,
+  (iii)~\emph{joint orientation offsets} (RPY terms encoding humeral torsion and
+  cranial shoulder tilt), and (iv)~\emph{actuation limits} (joint effort and
+  velocity bounds used as a proxy for muscular capacity). Modifications are
+  applied bilaterally and symmetrically to the left and right limbs.
+  Table~\ref{tab:morph} summarises the resulting parameter set.
+
+
+
+
+  \begin{table}[h]
+  \centering
+  \caption{Implemented upper-limb parameters across the four models, relative to
+  the modern-human ISB reference. Effort in N\,m, velocity in rad\,s$^{-1}$.
+  Non-human shoulder/elbow efforts were rescaled to comparative muscle-force
+  data (see Table~\ref{tab:rom}); the modern-human column is the unchanged ISB
+  source.}
+  \label{tab:morph}
+  \small
+  \begin{tabular}{@{}lcccc@{}}
+  \toprule
+  Parameter & Modern human & \textit{H.\,naledi} & Neanderthal & Chimpanzee \\
+  \midrule
+  \multicolumn{5}{@{}l}{\textit{Segment geometry}}\\
+  Humeral length (m)            & 0.276 & 0.256 & 0.248 & 0.283 \\
+  Humeral torsion offset (rad)  & 0.00  & 0.925 & 0.00  & 0.08  \\
+  Shoulder cranial tilt (rad)   & 0.00  & $-0.366$ & 0.00 & $-0.25$ \\
+  Clavicle origin, lateral (m)  & 0.176 & 0.160 & 0.210 & 0.180 \\
+  \midrule
+  \multicolumn{5}{@{}l}{\textit{Mass--inertia}}\\
+  Thorax mass (kg)              & 11.97 & 9.50  & 15.50 & 11.00 \\
+  Upper-arm mass (kg)           & 1.80  & 1.42  & 1.80  & 1.60  \\
+  Forearm mass (kg)             & 1.28  & 1.28  & 1.66  & 1.28  \\
+  \midrule
+  \multicolumn{5}{@{}l}{\textit{Actuation limits (effort / velocity)}}\\
+  Thoracic flexion              & 190 / 5.2 & 120 / 6.0 & 250 / 4.0 & 180 / 8.0 \\
+  Clavicle                      & 100 / 14.0 & 80 / 12.0 & 150 / 10.0 & 120 / 20.0 \\
+  Shoulder ($X$, abduction)     & 71 / 6.0  & 71 / 6.0  & 92 / 5.0  & 71 / 6.0  \\
+  Shoulder ($Y$, elevation)     & 52 / 6.0  & 44 / 6.0  & 52 / 6.0  & 73 / 15.0 \\
+  Elbow flexion                 & 77 / 19.9 & 70 / 19.9 & 115 / 12.0 & 108 / 25.0 \\
+  \bottomrule
+  \end{tabular}
+  \end{table}
+
+    \subsubsection*{Rationale for the four models}
+  We compare four upper-limb morphologies chosen to bracket the range of
+  variation relevant to manual tool use, spanning from a living, habitual
+  tool-maker to a living ape outgroup, with two extinct hominins of contrasting
+  build in between (Fig.~\ref{fig:species}):
+  \begin{itemize}
+    \item \textbf{Modern human} (\textit{Homo sapiens}) --- the reference
+    morphology and the only taxon for which in-task demonstration data are
+    available; a habitual, dexterous maker and user of flaked stone tools.
+    \item \textbf{Neanderthal} (\textit{H.\ neanderthalensis}) --- a closely
+    related, robustly built hominin and an established maker of
+    Mousterian/Levallois lithic industries. It tests whether a
+    high-robusticity, high-strength regime shifts the optimal manipulation
+    strategy.
+    \item \textbf{\textit{Homo naledi}} --- a small-bodied hominin with a
+    \emph{mosaic} upper limb: human-like in some hand and wrist features yet
+    primitive in others (a low-torsion humerus, curved phalanges, and a
+    cranially oriented, ``shrugged'' shoulder). Its tool-related behaviour
+    remains debated, making it an informative intermediate between the human
+    and ape conditions.
+    \item \textbf{Chimpanzee} (\textit{Pan troglodytes}) --- the closest living
+    relative and a tool \emph{user} (e.g.\ stone hammers for nut-cracking) but
+    not a knapper of flaked stone tools. It serves as the extant non-hominin
+    outgroup and a control for what an ape-grade upper limb predicts.
+  \end{itemize}
+  Together these taxa span a graded axis of upper-limb form---in segment
+  proportions, robusticity, joint orientation, and range of motion---while
+  performing the identical contact-rich shaving task. This lets us ask whether
+  morphology alone shifts the cost function recovered by inverse reinforcement
+  learning, and whether any such shift is consistent with the archaeological and
+  behavioural record of who did, and did not, manufacture flaked stone tools.
+    \begin{figure}[h]
+    \centering
+     \includegraphics[width=0.23\textwidth]{figures/models/neanderthalensis_JG_Recon_Head_CC_3qtr_lt_l.jpg.png}
+    \includegraphics[width=0.23\textwidth]{figures/models/H naledi reconstruction IMG_2355a l.jpg.png}
+    \includegraphics[width=0.23\textwidth]{figures/models/f369758da04e040151acc19bf7a552cb.jpg}
+
+    \caption{The models compared in this study (left to right):
+    Neanderthal, \textit{Homo naledi}, and chimpanzee. Source: https://humanorigins.si.edu/evidence/human-fossils/species , https://www.thegreatprojects.com/blog/fascinating-chimpanzees-facts]}
+    \label{fig:species}
+  \end{figure}
+
+  \newcommand{\armpanel}[9]{%
+  % xscale=-1 mirrors the limb to the subject's RIGHT arm (the analysed chain);
+  % node text is unaffected by the transform, so labels stay upright.
+  \begin{scope}[shift={(#1,0)},xscale=-1]
+    % --- torso silhouette (tapered; width encodes thoracic mass) ---
+    \coordinate (BL) at (-#9/2,0);        \coordinate (BR) at (#9/2,0);
+    \coordinate (TR) at (#9*0.31,3.2);    \coordinate (TL) at (-#9*0.31,3.2);
+    \draw[#8,fill=#8!10,rounded corners=3pt,line width=0.6pt]
+          (BL) -- (BR) -- (TR) -- (TL) -- cycle;
+    \draw[#8,line width=0.6pt] (-0.11,3.2) -- (-0.09,3.5)
+                               ( 0.11,3.2) -- ( 0.09,3.5);   % neck
+    \draw[#8,fill=#8!10,line width=0.6pt] (0,3.82) circle (0.32); % head
+    % --- shoulder (raised by cranial tilt) ---
+    \coordinate (S) at (#9*0.31, {3.2 + #4*0.012});
+    \pgfmathsetmacro{\ha}{-90 + #4}     % humerus direction
+    \pgfmathsetmacro{\fa}{-50 + #4}     % forearm direction (compact flexion)
+    \coordinate (E) at ($(S)+(\ha:#3)$);
+    \coordinate (H) at ($(E)+(\fa:2.1)$);
+    % --- limb segments (width encodes robusticity) ---
+    \draw[#8,line width=#6 pt,line cap=round] (S) -- (E);
+    \draw[#8,line width=#7 pt,line cap=round] (E) -- (H);
+    \fill[#8] (S) circle (2.6pt);  \fill[#8] (E) circle (2.2pt);
+    % --- stick held at the hand ---
+    \draw[brown!70!black,line width=2.2pt,line cap=round]
+          ($(H)+(190:0.4)$) -- ($(H)+(-10:0.4)$);
+    % --- humeral length label ---
+    \pgfmathsetmacro{\lm}{#3/10}
+    \node[#8,font=\scriptsize,left=1pt] at ($(S)!0.5!(E)$) {\pgfmathprintnumber[precision=3]{\lm}\,m};
+    % --- humeral torsion: drawn ON the humerus shaft (not the elbow) and
+    %     spelled out, so the value is not misread as the elbow flexion angle ---
+    \coordinate (Tpos) at ($(S)!0.6!(E)$);
+    \ifnum#5>10
+       \draw[#8,->,line width=0.7pt]
+          ([shift=(40:0.24)]Tpos) arc[start angle=40,end angle=300,radius=0.24];
+       \node[#8,font=\scriptsize,right=6pt] at (Tpos) {torsion #5\textdegree};
+    \else
+       \node[black!55,font=\scriptsize,right=6pt] at (Tpos) {torsion #5\textdegree};
+    \fi
+    % --- cranial tilt: beside the shoulder joint, clear of the head ---
+    \ifnum#4>0 \node[#8,font=\scriptsize] at ($(S)+(0,0.28)$) {tilt #4\textdegree}; \fi
+    % --- taxon label ---
+    \node[#8,font=\bfseries\small] at (0,-0.8) {#2};
+  \end{scope}}
+
+
+
+  \begin{figure}[t]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[>=stealth]
+    %          x   name                 hum  tilt tor  upW  foW  colour      torsoW
+    \armpanel{0}  {Modern human}       {2.76}{0} {0}  {2.4}{1.8}{cbModern} {1.40}
+    \armpanel{4}  {\textit{H.\,naledi}}{2.56}{21}{53} {1.5}{1.5}{cbNaledi} {1.10}
+    \armpanel{8}  {Neanderthal}        {2.48}{0} {0}  {2.6}{3.0}{cbNeander}{1.85}
+    \armpanel{12} {Chimpanzee}         {2.83}{14}{5}  {2.0}{1.8}{cbChimp}  {1.30}
+  \end{tikzpicture}}
+  \caption{Comparative upper-limb kinematics of the four models, drawn in a
+  common sharpening pose. All share the 36-DOF ISB base topology; panels differ
+  only in the literature-anchored parameters of Table~\ref{tab:morph}.
+  \emph{Visual encoding:} humeral segment drawn to scale and labelled (m);
+  limb line-thickness $\propto$ segment robusticity (mass); torso width
+  $\propto$ thoracic mass; the curved arrow ($\circlearrowleft$, degrees) marks
+  humeral torsion (an axial, out-of-plane rotation); a raised shoulder denotes
+  cranial tilt; the brown bar is the worked stick. \textit{H.\,naledi} is
+  distinguished by its $53^\circ$ torsion offset and shrugged shoulder, the
+  Neanderthal by its short, robust forearm and heavy thorax, the chimpanzee by
+  its long humerus and high suspensory shoulder.}
+  \label{fig:morph}
+  \end{figure}
+
+  \paragraph{\textit{Homo naledi}: the climber}
+  Parameters for \textit{H.\,naledi} are derived from specimen U.W.\,101-283 as
+  reported by \citet{feuerriegel2017}. The humeral length is set to
+  $256$\,mm (Table~3 of \citealp{feuerriegel2017}), substantially shorter than
+  the modern human mean ($\sim$\,323\,mm), shortening the effective lever and
+  requiring the model to operate closer to the workpiece. The defining
+  modification is a low humeral torsion of $91.0^\circ$ versus $144.1^\circ$ in
+  modern humans (Table~4), encoded as a $\sim$$53^\circ$ internal-rotation offset
+  ($\mathrm{rpy}_z = 0.925$). This rotates the elbow medially (``pigeon-toed''),
+  so that maintaining a tool parallel to the chest is no longer kinematically
+  natural. A superiorly and laterally positioned scapula
+  (glenoid angle $121.1^\circ$ vs.\ $142.4^\circ$; Table~8) is represented by a
+  $\sim$$21^\circ$ cranial shoulder tilt, producing a ``shrugged'' posture.
+  Reduced robusticity (robusticity index $0.1835$ vs.\ $0.2055$; Table~5) is
+  reflected in lower segment masses and effort limits. We therefore predict the
+  inverse-reinforcement-learning (IRL) recovered reward to favour
+  \emph{high-frequency, low-pressure} strokes and elevated, near-overhead working
+  heights, consistent with a limb adapted for suspension rather than power
+  manipulation.
+
+\paragraph{Neanderthal: the power-scraper}
+  Neanderthal geometry follows \citet{degroote2011} and the activity-based
+  muscular argument of \citet{shaw2012}. Distal shortening (ulna $247.91$\,mm,
+  radius $227.76$\,mm; \citealp[Table~4]{degroote2011}) is a cold-climate
+  adaptation producing a shorter but stiffer lever favourable for high-pressure
+  forces applied close to the body. Forearm mass is increased by $\sim$30\%
+  (``hyper-polar robusticity''; \citealp[p.~397]{degroote2011}) with the
+  centre of mass shifted laterally to approximate the bowed, laterally curved
+  radius, which increases rotational moment arms. The barrel-shaped thorax is
+  modelled as a heavy ($15.5$\,kg), stiff anchor (thoracic effort $250$\,N\,m
+  over a restricted $\pm0.6$\,rad range), and a $\sim$15\% longer clavicle
+  displaces the shoulder laterally. Elbow ($+50\%$) and shoulder-abduction
+  ($71{\to}92$\,N\,m, $\sim$$1.3\times$ human) effort limits encode the elevated pectoralis-major and
+  anterior-deltoid demand reported during scraping
+  (\citealp[Tables~1--2]{shaw2012}). We predict an IRL reward dominated by
+  \emph{force consistency} over peak speed, with coordinated torso-rotation and
+  arm-extension---a whole-body ``cleaving'' strategy.
+
+  \paragraph{Chimpanzee: the explosive climber control}
+  \textit{Pan} parameters use the comparative control data of
+  \citet{feuerriegel2017} and primate muscle architecture from
+  \citet{oneill2017}. The humerus is the longest of the set ($283.5$\,mm;
+  \citealp[Table~3]{feuerriegel2017}), increasing whole-limb inertia and
+  penalising the short, precise strokes that whittling requires. Humeral torsion
+  is near-modern ($139.0^\circ$; Table~4), so the elbow orientation
+  ($\mathrm{rpy}_z = 0.08$) resembles ours; the chimpanzee's predicted task
+  difficulty therefore arises not from the arm but from hand/wrist alignment
+  constraints. The shoulder is highly cranially oriented and powerful, but its
+  strength advantage is calibrated to \citet{oneill2017}, who found chimpanzee
+  muscle exceeds human by only $\approx$$1.35$--$1.5\times$ in maximum
+  \emph{dynamic} force/power (driven by a $67\%$ vs.\ $40\%$ fast-twitch fibre
+  fraction and longer fascicles), \emph{not} by an exceptional static torque.
+  We therefore set the shoulder-elevation effort to $73$\,N\,m
+  ($\sim$$1.4\times$ human) and carry the dynamic edge through the elevated
+  velocity limit ($15$\,rad\,s$^{-1}$), rather than the previously assumed
+  $2$--$3\times$ static torque. The chimpanzee's manipulation deficit is encoded
+  \emph{distally} instead: a restricted wrist (dorsiflexion capped at
+  $\sim$$20^\circ$) and reduced forearm pronation--supination
+  (Table~\ref{tab:rom}) reproduce the hand/wrist-alignment constraint. This
+  replaces the earlier elbow ``bony stop,'' which \citet{straus1940} (via
+  \citealp{knuckle2020}) showed to be a soft-tissue, not osseous, limit. We
+  expect the IRL reward to expose a mismatch: explosive dynamic capacity with a
+  high energetic penalty for sustained, repetitive manipulation, yielding
+  ``hooking'' rather than ``whittling'' trajectories.
+
+  \begin{figure}
+      \centering
+      \includegraphics[width=0.95\linewidth]{figures/models/reach2.png}
+      \caption{Reach of different models}
+      \label{fig:placeholder}
+  \end{figure}
+
+  \begin{table}[h]
+  \centering
+  \caption{Forward characterization of the four models, computed
+  directly from the URDFs (right limb) rather than from demonstrations.
+  \emph{Max reach}: farthest right-hand position from the shoulder over $6000$
+  arm configurations sampled uniformly within the joint limits. \emph{Tool-axis
+  cone}: angular spread of the achievable hand long-axis (a dexterity proxy from
+  the mean resultant length of the sampled orientations). \emph{Static effort}
+  $\lVert\tau\rVert$: gravity-compensation torque norm holding a fixed
+  mid-reach target ($[0.35,0,1.2]$\,m). \emph{Capacity used}
+  $\sum|\tau_i|/\tau_{i,\max}$: summed per-joint fraction of the effort limits at
+  that pose. Reach and effort separate the models by segment geometry and limb
+  mass; the contracted tool-axis cones of the chimpanzee and \textit{H.\,naledi}
+  reflect their reduced distal range of motion; and the chimpanzee's low
+  capacity-used value follows from the muscle-force-based effort rescaling of
+  Table~\ref{tab:rom}.}
+  \label{tab:capabilities}
+  \small
+  \begin{tabular}{@{}lcccc@{}}
+  \toprule
+  Model & Max reach & Tool-axis cone & Static effort & Capacity used \\
+        & (cm)      & (deg)          & $\lVert\tau\rVert$ (N\,m) & $\sum|\tau_i|/\tau_{i,\max}$ \\
+  \midrule
+  Modern human        & 79 & 163 & 8.9 & 0.22 \\
+  \textit{H.\,naledi} & 58 & 139 & 6.3 & 0.21 \\
+  Neanderthal         & 76 & 159 & 9.7 & 0.21 \\
+  Chimpanzee          & 62 & 148 & 5.7 & 0.15 \\
+  \bottomrule
+  \end{tabular}
+  \end{table}
+
+
+  \subsubsection{Joint range-of-motion and actuation-limit calibration}
+  \label{sec:rom}
+  The base ISB joint \emph{ranges} are generous and identical across taxa, so
+  the original models differentiated species almost entirely through segment
+  geometry and inertia. To let the reachable workspace and manipulation
+  capability also reflect morphology, we calibrated the distal-joint range
+  limits and rescaled the actuation efforts against measured comparative data
+  (Table~\ref{tab:rom}). The modern-human model is left at its original ISB
+  source values and shown only as the reference baseline. Three points warrant
+  emphasis for verification:
+  \begin{enumerate}
+    \item \emph{Effort rescaling.} The chimpanzee ``super-strength'' advantage
+    of \citet{oneill2017} is $\approx$$1.35$--$1.5\times$ in maximum
+    \emph{dynamic} force/power, \emph{not} in static torque. We scale the
+    chimpanzee shoulder/elbow efforts to $\sim$$1.4\times$ human (shoulder
+    elevation $52{\to}73$\,N\,m; elbow $77{\to}108$\,N\,m) and carry the dynamic
+    edge through velocity limits. Neanderthal and \textit{H.\,naledi} shoulder
+    efforts are scaled to $\sim$$1.3\times$ and $\sim$$0.85\times$ human.
+    \item \emph{Wrist as the chimpanzee bottleneck.} The knuckle-walking
+    chimpanzee wrist has a measured dorsiflexion range of only
+    $\sim$$5$--$20^\circ$ \citep{knuckle2020}; we cap \texttt{wrist\_Z}
+    extension at $0.35$\,rad ($20^\circ$) and reduce forearm rotation
+    (\texttt{elbow\_Y}) and wrist deviation (\texttt{wrist\_X}). \citet{straus1940} showed the limit is
+    soft-tissue, not osseous.
+    \item \emph{Inference and sign conventions.} Fossil ROM cannot be measured;
+    \textit{H.\,naledi} and Neanderthal ranges are set near-human and flagged as
+    inferred. Because the left/right \texttt{wrist\_X} and \texttt{elbow\_Y}
+    axes are mirrored, \texttt{wrist\_X} is kept symmetric; the asymmetric
+    \texttt{wrist\_Z} cap is consistent only because both wrists share a $+z$
+    axis. The assumption that the \texttt{wrist\_Z} upper bound is
+    extension/dorsiflexion should be confirmed in the kinematic viewer.
+  \end{enumerate}
+
+  \begin{table}[h]
+  \centering
+  \caption{Calibrated distal-joint range-of-motion and effort limits for the
+  three non-human models. Ranges as $[\text{lower},\text{upper}]$ in radians
+  (degrees in parentheses); efforts in N\,m. The modern-human column is the
+  unchanged ISB reference. Confidence: \textbf{M}\,=\,measured comparative data,
+  \textbf{I}\,=\,inferred from morphology.}
+  \label{tab:rom}
+  \small
+  \begin{tabular}{@{}llcccc@{}}
+  \toprule
+  Joint (DOF) & & Human (ref.) & \textit{H.\,naledi} & Neanderthal & Chimpanzee \\
+  \midrule
+  Wrist flex/ext   & rad   & $[-1.57,1.57]$ & $[-1.13,1.22]$ & $[-1.13,1.22]$ & $[-1.05,0.35]$ \\
+                                      & conf. & ---            & I              & I              & \textbf{M} \\
+  Wrist dev.\      & rad   & $\pm0.785$     & $\pm0.45$      & $\pm0.45$      & $\pm0.26$ \\
+                                      & conf. & ---            & I              & I              & I \\
+  Forearm pron/sup, upper) & rad & $3.14$   & $2.62$         & $2.79$         & $1.40$ \\
+                                      & conf. & ---            & I              & I              & I \\
+  Elbow ext.\ floor , lower) & rad & $0$     & $0$            & $0$            & $0$ \\
+  \midrule
+  Shoulder elevation ) & N\,m & 52 & 44 & 52 & 73 \\
+  Shoulder abduction ) & N\,m & 71 & 71 & 92 & 71 \\
+  Elbow flexion          & N\,m & 77 & 70 & 115 & 108 \\
+  \bottomrule
+  \end{tabular}
+  \end{table}
+
+  \subsubsection{Implementation notes and limitations}
+  (1)~Effort limits are partly anchored to comparative muscle-force data
+  (\citealp{oneill2017}; Table~\ref{tab:rom}) but remain joint-level
+  \emph{proxies} for muscular capacity, not measured joint torques. (2)~The
+  current URDFs are bilaterally symmetric; the right-dominant strength asymmetry
+  (24--57\%) reported for Neanderthals by \citet{shaw2012} is \emph{not} yet
+  implemented and is left for future work. (3)~In the Neanderthal model the
+  humeral (upper-arm) link length is set to the published \emph{ulna} value
+  ($248$\,mm); this conflates forearm and upper-arm shortening and should be
+  revisited if segment-specific lever effects are analysed. (4)~Fossil
+  (\textit{H.\,naledi}, Neanderthal) range-of-motion limits are inferred rather
+  than measured and set near-human; only the chimpanzee wrist-extension cap
+  rests on measured kinematic data \citep{knuckle2020}.
+
+% ===========================================================================
+% REFERENCES TO ADD TO THE .bib AND DOUBLE-CHECK BEFORE SUBMISSION
+% [confirmed] = citation verified;  [VERIFY] = confirm author/year/page.
+% ===========================================================================
+% oneill2017  [confirmed]
+%   O'Neill MC, Umberger BR, Holowka NB, Larson SG, Reiser PJ (2017).
+%   "Chimpanzee super strength and human skeletal muscle evolution."
+%   PNAS 114(28):7343-7348.  https://www.pnas.org/doi/10.1073/pnas.1619071114
+%   -> chimp muscle ~1.35x human max dynamic force/power; fast-twitch 67% vs 40%.
+%
+% knuckle2020  [VERIFY authors]
+%   "The biomechanics of knuckle-walking: 3-D kinematics of the chimpanzee and
+%   macaque wrist, hand and fingers." J. Exp. Biol. 223(14):jeb224360 (2020).
+%   https://journals.biologists.com/jeb/article/223/14/jeb224360
+%   -> chimp wrist max extension (dorsiflexion) only ~5-20 deg.
+%
+% straus1940  [VERIFY full ref]
+%   Straus WL Jr (1940). Passive chimpanzee wrist extension increases as digital
+%   flexors are sequentially transected -> extension is soft-tissue limited, not
+%   osseous. (cited via knuckle2020).
+%
+% wristmoments2024  [VERIFY]
+%   "A cadaveric study of wrist-joint moments in chimpanzees and orangutans with
+%   implications for the evolution of knuckle-walking." J. Hum. Evol. (2024).
+%   https://www.sciencedirect.com/science/article/pii/S0047248424001088
+%
+% myatt2012  [VERIFY]
+%   Myatt JP et al. (2012). "Functional adaptations in the forelimb muscles of
+%   non-human great apes." J. Anat.
+%   https://onlinelibrary.wiley.com/doi/full/10.1111/j.1469-7580.2011.01443.x
+%   -> longer ape pronator fascicles (force over greater pron/sup range).
+%
+% norkinwhite  [confirmed standard ref] -- HUMAN normative ROM (model UNCHANGED;
+%   listed only as the baseline reference column)
+%   Norkin CC, White DJ. "Measurement of Joint Motion: A Guide to Goniometry."
+%   F.A. Davis.  -> wrist flex ~73-80, ext ~70, radial dev ~20, ulnar dev ~30;
+%   forearm pron/sup ~80/80 deg; shoulder flex/abd 180, ext rot 90 (AAOS).
+%
+% Human peak isometric torque (context for the effort baselines; not applied to
+% the human model, which keeps its original ISB efforts):
+% wristtorque1996  [VERIFY author/year]  PubMed 8884484 -- wrist flex ~12 Nm, ext ~7 Nm.
+% elbowtorque2018  [VERIFY] systematic review -- elbow flexion ~46 Nm at 90 deg.
+% shouldertorque2025 [VERIFY] J. Funct. Morphol. Kinesiol. (PMC12821543)
+%   -- shoulder flexion ~77 Nm at 90 deg.
+% ===========================================================================

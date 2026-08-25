@@ -1,0 +1,791 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="S1_scaled.urdf">
+  <material name="body_color">
+    <color rgba="0.2 0.05 0.8 0.3" />
+    <texture />
+  </material>
+  <material name="body_color_R">
+    <color rgba="0.8 0.05 0.2 0.6" />
+    <texture />
+  </material>
+  <material name="body_color_L">
+    <color rgba="0.05 0.8 0.2 0.6" />
+    <texture />
+  </material>
+  <material name="Black">
+    <color rgba="0 0 0 1" />
+    <texture />
+  </material>
+  <material name="marker_color">
+    <color rgba="1 0 0 1" />
+    <texture />
+  </material>
+  <link name="middle_pelvis">
+    <inertial>
+      <mass value="71.182" />
+      <origin xyz="0.004960 -0.075652 -0.007521" rpy="0 0 0" />
+      <inertia ixx="10.356715003062648" ixy="0.32619303058814075" ixz="0.002526844133921523" iyy="0.6833544506232746" iyz="0.11082413690174592" izz="10.062950595370214" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 -0.050000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/pelvis_mesh.STL" scale="0.005670 0.005800 0.005220" />
+      </geometry>
+      <material name="body_color" />
+    </visual>
+  </link>
+  <link name="left_upperleg_virtual">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="left_upperleg_virtual_2">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="left_upperleg">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.023000 -0.150000 -0.082000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/upperleg_mesh.STL" scale="0.006200 0.006400 0.006900" />
+      </geometry>
+      <material name="body_color_L" />
+    </visual>
+  </link>
+  <link name="left_lowerleg">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.023000 -0.539000 -0.082000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/lowerleg_mesh.STL" scale="0.006300 0.006600 0.007000" />
+      </geometry>
+      <material name="body_color_L" />
+    </visual>
+    <visual>
+      <origin xyz="0.023000 -0.539000 -0.082000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/knee_mesh.STL" scale="0.005600 0.005600 0.005600" />
+      </geometry>
+      <material name="body_color_L" />
+    </visual>
+  </link>
+  <link name="left_foot_virtual">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="left_foot">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.023000 -0.979000 -0.082000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/foot_mesh.STL" scale="0.006700 0.006700 0.006700" />
+      </geometry>
+      <material name="body_color_L" />
+    </visual>
+  </link>
+  <link name="middle_abdomen_virtual">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="middle_abdomen">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/abdomen_mesh.STL" scale="0.007400 0.007400 0.007400" />
+      </geometry>
+      <material name="body_color" />
+    </visual>
+  </link>
+  <link name="middle_thorax_virtual">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="middle_thorax_virtual_2">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="middle_thorax">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 -0.169065 -0.003589" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/torso_mesh.STL" scale="0.007000 0.007000 0.007000" />
+      </geometry>
+      <material name="body_color" />
+    </visual>
+  </link>
+  <link name="left_clavicle">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="left_upperarm_virtual">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="left_upperarm_virtual_2">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="left_upperarm">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.008000 0.251935 -0.213589" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/shoulder_mesh.STL" scale="0.003900 0.003900 0.003900" />
+      </geometry>
+      <material name="body_color_L" />
+    </visual>
+    <visual>
+      <origin xyz="0.008000 0.301935 -0.213589" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/upperarm_mesh.STL" scale="0.006300 0.006000 0.006900" />
+      </geometry>
+      <material name="body_color_L" />
+    </visual>
+  </link>
+  <link name="left_lowerarm_virtual">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="left_lowerarm">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.008000 -0.024065 -0.213589" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/lowerarm_mesh.STL" scale="0.006400 0.006400 0.006400" />
+      </geometry>
+      <material name="body_color_L" />
+    </visual>
+    <visual>
+      <origin xyz="0.008000 -0.024065 -0.213589" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/elbow_mesh.STL" scale="0.005500 0.005500 0.005500" />
+      </geometry>
+      <material name="body_color_L" />
+    </visual>
+  </link>
+  <link name="left_hand_virtual">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="left_hand">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.008000 -0.311065 -0.213589" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/hand_mesh.STL" scale="0.006100 0.006100 0.006100" />
+      </geometry>
+      <material name="body_color_L" />
+    </visual>
+  </link>
+  <link name="middle_head_virtual">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="middle_head_virtual_2">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="middle_head">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.400935 -0.003589" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/head_mesh.STL" scale="0.005040 0.005600 0.005040" />
+      </geometry>
+      <material name="body_color" />
+    </visual>
+    <visual>
+      <origin xyz="0.000000 0.400935 -0.003589" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/neck_mesh.STL" scale="0.004500 0.005000 0.004500" />
+      </geometry>
+      <material name="body_color" />
+    </visual>
+  </link>
+  <link name="right_clavicle">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="right_upperarm_virtual">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="right_upperarm_virtual_2">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="right_upperarm">
+    <inertial>
+      <mass value="1.8" />
+      <origin xyz="0.005000 -0.125000 -0.007000" rpy="0 0 0" />
+      <inertia ixx="0.01314" ixy="0.00049" ixz="0.00034" iyy="0.00268" iyz="5e-05" izz="0.014" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/shoulder_mesh.STL" scale="0.003510 0.003900 0.003510" />
+      </geometry>
+      <material name="body_color_R" />
+    </visual>
+    <visual>
+      <origin xyz="0.000000 0.050000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/upperarm_mesh.STL" scale="0.005670 0.006000 0.006210" />
+      </geometry>
+      <material name="body_color_R" />
+    </visual>
+  </link>
+  <link name="right_lowerarm_virtual">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="right_lowerarm">
+    <inertial>
+      <mass value="1.28" />
+      <origin xyz="0.003000 -0.120000 0.004000" rpy="0 0 0" />
+      <inertia ixx="0.00825" ixy="9e-05" ixz="4e-05" iyy="0.0012700000000000003" iyz="-0.00067" izz="0.00767" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/lowerarm_mesh.STL" scale="0.005760 0.006400 0.005760" />
+      </geometry>
+      <material name="body_color_R" />
+    </visual>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/elbow_mesh.STL" scale="0.004950 0.005500 0.004950" />
+      </geometry>
+      <material name="body_color_R" />
+    </visual>
+  </link>
+  <link name="right_hand_virtual">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="right_hand">
+    <inertial>
+      <mass value="0.45" />
+      <origin xyz="0.015000 -0.153000 0.014000" rpy="0 0 0" />
+      <inertia ixx="0.00558" ixy="0.00073" ixz="0.00034" iyy="0.00216" iyz="-0.0006" izz="0.0047" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/hand_mesh.STL" scale="0.006100 0.006100 0.006100" />
+      </geometry>
+      <material name="body_color_R" />
+    </visual>
+  </link>
+  <link name="right_upperleg_virtual">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="right_upperleg_virtual_2">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="right_upperleg">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.023000 -0.150000 0.082000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/upperleg_mesh.STL" scale="0.006200 0.006400 0.006900" />
+      </geometry>
+      <material name="body_color_R" />
+    </visual>
+  </link>
+  <link name="right_lowerleg">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.023000 -0.539000 0.082000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/lowerleg_mesh.STL" scale="0.006300 0.006600 0.007000" />
+      </geometry>
+      <material name="body_color_R" />
+    </visual>
+    <visual>
+      <origin xyz="0.023000 -0.539000 0.082000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/knee_mesh.STL" scale="0.005600 0.005600 0.005600" />
+      </geometry>
+      <material name="body_color_R" />
+    </visual>
+  </link>
+  <link name="right_foot_virtual">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <link name="right_foot">
+    <inertial>
+      <mass value="0.0" />
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.023000 -0.979000 0.082000" rpy="0.000000 -0.000000 0.000000" />
+      <geometry>
+        <mesh filename="meshes/foot_mesh.STL" scale="0.006700 0.006700 0.006700" />
+      </geometry>
+      <material name="body_color_R" />
+    </visual>
+  </link>
+  <joint name="right_shoulder_Z" type="revolute">
+    <parent link="middle_pelvis" />
+    <child link="right_upperarm_virtual" />
+    <origin xyz="-0.014542 0.382936 0.186340" rpy="0.000000 -0.000000 0.000000" />
+    <axis xyz="0.000000 0.000000 1.000000" />
+    <limit effort="92.0" velocity="17.6" lower="-3.14159" upper="3.14159" />
+  </joint>
+  <joint name="right_shoulder_X" type="revolute">
+    <parent link="right_upperarm_virtual" />
+    <child link="right_upperarm_virtual_2" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+    <axis xyz="-1.000000 0.000000 0.000000" />
+    <limit effort="71.0" velocity="6.0" lower="-1.0472" upper="3.14159" />
+  </joint>
+  <joint name="right_shoulder_Y" type="revolute">
+    <parent link="right_upperarm_virtual_2" />
+    <child link="right_upperarm" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+    <axis xyz="0.000000 1.000000 0.000000" />
+    <limit effort="52.0" velocity="6.0" lower="-1.5708" upper="3.14159" />
+  </joint>
+  <joint name="right_elbow_Z" type="revolute">
+    <parent link="right_upperarm" />
+    <child link="right_lowerarm_virtual" />
+    <origin xyz="-0.000000 -0.197960 0.000000" rpy="0.000000 -0.000000 0.000000" />
+    <axis xyz="0.000000 0.000000 1.000000" />
+    <limit effort="77.0" velocity="19.9" lower="0.0" upper="2.617991667" />
+  </joint>
+  <joint name="right_elbow_Y" type="revolute">
+    <parent link="right_lowerarm_virtual" />
+    <child link="right_lowerarm" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+    <axis xyz="0.000000 1.000000 0.000000" />
+    <limit effort="15.0" velocity="6.0" lower="-0.349066" upper="3.14159" />
+  </joint>
+  <joint name="right_wrist_Z" type="revolute">
+    <parent link="right_lowerarm" />
+    <child link="right_hand_virtual" />
+    <origin xyz="0.000000 -0.287000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+    <axis xyz="0.000000 0.000000 1.000000" />
+    <limit effort="100.0" velocity="25.0" lower="-1.5708" upper="1.5708" />
+  </joint>
+  <joint name="right_wrist_X" type="revolute">
+    <parent link="right_hand_virtual" />
+    <child link="right_hand" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+    <axis xyz="-1.000000 0.000000 0.000000" />
+    <limit effort="100.0" velocity="6.0" lower="-0.785398" upper="0.785398" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_upperleg_virtual" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_upperleg_virtual" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_upperleg_virtual_2" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_upperleg_virtual_2" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_upperleg" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_upperleg" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_lowerleg" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_lowerleg" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_foot_virtual" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_foot_virtual" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_foot" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_foot" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_middle_abdomen_virtual" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="middle_abdomen_virtual" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_middle_abdomen" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="middle_abdomen" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_middle_thorax_virtual" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="middle_thorax_virtual" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_middle_thorax_virtual_2" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="middle_thorax_virtual_2" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_middle_thorax" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="middle_thorax" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_clavicle" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_clavicle" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_upperarm_virtual" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_upperarm_virtual" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_upperarm_virtual_2" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_upperarm_virtual_2" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_upperarm" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_upperarm" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_lowerarm_virtual" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_lowerarm_virtual" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_lowerarm" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_lowerarm" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_hand_virtual" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_hand_virtual" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_left_hand" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="left_hand" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_middle_head_virtual" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="middle_head_virtual" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_middle_head_virtual_2" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="middle_head_virtual_2" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_middle_head" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="middle_head" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_right_clavicle" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="right_clavicle" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_right_upperleg_virtual" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="right_upperleg_virtual" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_right_upperleg_virtual_2" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="right_upperleg_virtual_2" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_right_upperleg" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="right_upperleg" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_right_lowerleg" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="right_lowerleg" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_right_foot_virtual" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="right_foot_virtual" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <joint name="fixed_middle_pelvis_to_right_foot" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="right_foot" />
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <link name="RPSI">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.01" />
+      </geometry>
+      <material name="marker_color" />
+    </visual>
+  </link>
+  <joint name="joint_RPSI" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="RPSI" />
+    <origin xyz="-0.090000 0.000000 0.065000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <link name="LPSI">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.01" />
+      </geometry>
+      <material name="marker_color" />
+    </visual>
+  </link>
+  <joint name="joint_LPSI" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="LPSI" />
+    <origin xyz="-0.090000 0.000000 -0.065000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <link name="RASI">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.01" />
+      </geometry>
+      <material name="marker_color" />
+    </visual>
+  </link>
+  <joint name="joint_RASI" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="RASI" />
+    <origin xyz="0.090000 0.000000 0.130000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <link name="LASI">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.01" />
+      </geometry>
+      <material name="marker_color" />
+    </visual>
+  </link>
+  <joint name="joint_LASI" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="LASI" />
+    <origin xyz="0.090000 0.000000 -0.130000" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <link name="RSHO">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.01" />
+      </geometry>
+      <material name="marker_color" />
+    </visual>
+  </link>
+  <joint name="joint_RSHO" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="RSHO" />
+    <origin xyz="-0.014542 0.450171 0.186340" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <link name="LSHO">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.01" />
+      </geometry>
+      <material name="marker_color" />
+    </visual>
+  </link>
+  <joint name="joint_LSHO" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="LSHO" />
+    <origin xyz="0.014542 0.459572 -0.207972" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <link name="C7">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.01" />
+      </geometry>
+      <material name="marker_color" />
+    </visual>
+  </link>
+  <joint name="joint_C7" type="fixed">
+    <parent link="middle_pelvis" />
+    <child link="C7" />
+    <origin xyz="-0.078102 0.504871 -0.010816" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <link name="RMELB">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.01" />
+      </geometry>
+      <material name="marker_color" />
+    </visual>
+  </link>
+  <joint name="joint_RMELB" type="fixed">
+    <parent link="right_upperarm" />
+    <child link="RMELB" />
+    <origin xyz="-0.000000 -0.190964 -0.034294" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <link name="RELB">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.01" />
+      </geometry>
+      <material name="marker_color" />
+    </visual>
+  </link>
+  <joint name="joint_RELB" type="fixed">
+    <parent link="right_upperarm" />
+    <child link="RELB" />
+    <origin xyz="-0.000000 -0.204956 0.034294" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <link name="RMWRI">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.01" />
+      </geometry>
+      <material name="marker_color" />
+    </visual>
+  </link>
+  <joint name="joint_RMWRI" type="fixed">
+    <parent link="right_lowerarm" />
+    <child link="RMWRI" />
+    <origin xyz="0.000000 -0.245599 0.026912" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+  <link name="RWRI">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.01" />
+      </geometry>
+      <material name="marker_color" />
+    </visual>
+  </link>
+  <joint name="joint_RWRI" type="fixed">
+    <parent link="right_lowerarm" />
+    <child link="RWRI" />
+    <origin xyz="0.000000 -0.243584 -0.026912" rpy="0.000000 -0.000000 0.000000" />
+  </joint>
+</robot>

@@ -1,0 +1,186 @@
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath:  [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --primary-color: #2563eb; /* Modern Blue */
+    --heading-color: #5d7dc7; /* Deep Navy */
+    --text-color: #000000;    /* Slate Gray */
+    --bg-light: #f8fafc;
+    --border-color: #e2e8f0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.75;
+    color: var(--text-color);
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Compact & Modern Header */
+  .page-header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    padding: 4rem 1rem; /* Slightly reduced height */
+    text-align: center;
+    border-bottom: 4px solid var(--primary-color);
+  }
+
+  .page-header h1.project-name {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+  }
+
+  .page-header h2.project-tagline {
+    font-size: 1.2rem;
+    font-weight: 400;
+    opacity: 0.8;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #cbd5e1;
+  }
+
+  /* Clean Main Content */
+  .main-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
+
+  .main-content h1, .main-content h2, .main-content h3 {
+    color: var(--heading-color);
+    margin-top: 2.5rem;
+    font-weight: 700;
+  }
+
+  .main-content h2 {
+    font-size: 1.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  /* Links */
+  .main-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .main-content a:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+
+  /* Academic Style Tables */
+  .main-content table {
+    width: 100%;
+    margin: 2rem 0;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    border-top: 2px solid var(--heading-color);
+    border-bottom: 2px solid var(--heading-color);
+  }
+
+  .main-content table th {
+    background: white;
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    color: var(--heading-color);
+  }
+
+  .main-content table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  /* Code Blocks - Monospaced & Clean */
+  .main-content code {
+    font-family: 'Fira Code', monospace;
+    background: #f1f5f9;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #ef4444; /* Soft Red */
+  }
+
+  /* Blockquotes for Key Insights */
+  .main-content blockquote {
+    border-left: 4px solid var(--primary-color);
+    background: var(--bg-light);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #475569;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white !important;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    margin-top: 1rem;
+    border: none;
+    transition: transform 0.1s;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    text-decoration: none !important;
+  }
+
+  /* MathJax spacing */
+  .MathJax_Display {
+    margin: 2rem 0 !important;
+    padding: 1rem;
+    background: #fcfcfc;
+    border-radius: 8px;
+  }
+
+  /* site nav — injected just under the header, sticky on scroll */
+  .site-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 4px;background:#0f172a;
+    padding:8px 12px;border-bottom:3px solid var(--primary-color);position:sticky;top:0;z-index:50}
+  .site-nav a{color:#c7d2e5 !important;font-size:13px;font-weight:600;padding:6px 12px;border-radius:6px;
+    text-decoration:none !important;transition:background .12s,color .12s}
+  .site-nav a:hover{background:rgba(255,255,255,.09);color:#fff !important}
+  .site-nav a.on{background:var(--primary-color);color:#fff !important}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var hdr=document.querySelector('.page-header'); if(!hdr||document.querySelector('.site-nav')) return;
+  var base='{{ site.baseurl }}';
+  // Only the inspector is published while the other pages are under review.
+  var items=[['Inspector','/species_inspector.html'],['Recovery','/recovery']];
+  var path=location.pathname.replace(/\/$/,'').replace(/\.html$/,'');
+  var nav=document.createElement('nav'); nav.className='site-nav';
+  nav.innerHTML=items.map(function(it){
+    var seg=it[1].replace(/\.html$/,''), href=base+it[1];
+    var on = seg==='/' ? (path===base||path.endsWith('/index')||path.endsWith(base)) : path.endsWith(seg);
+    return '<a href="'+href+'"'+(on?' class="on"':'')+'>'+it[0]+'</a>';
+  }).join('');
+  hdr.parentNode.insertBefore(nav, hdr.nextSibling);
+});
+</script>
