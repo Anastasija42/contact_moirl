@@ -12,21 +12,15 @@ setups, and the full per-subject and population recovery tables.
 
 ## Recovered movement
 
-The shared population cost, recovered from the long down-stroke, re-solved and
-overlaid on the recorded demonstration (blue = recorded demo, orange = rollout
-under the recovered cost) across the eight active arm DOFs.
+The shared population cost, recovered from the long down-stroke, re-solved on each
+subject's own body and overlaid on the recorded demonstration (blue = recorded demo,
+orange = rollout under the recovered cost). The two nearly coincide — the recovered
+cost reproduces the scraping motion across subjects of different morphology.
 
-<p align="center">
-<img src="assets/figures/recovery_down/pooled_down_B_positions.png" width="760" alt="Recovered vs demonstrated joint positions over the long down-stroke, all nine tracked joints">
-</p>
-
-Stroke shape and timing are reproduced across all nine channels, and the thoracic,
-shoulder-Y and wrist-Z channels track the demonstration closely. The residuals are
-not uniform: the elbow and the distal wrist depart by up to ~10 deg, which is where
-the identifiability analysis says the demonstrations constrain the cost least.
-
-<p align="center">
-<img src="assets/figures/recovery_down/pooled_down_B_force.png" width="480" alt="Recovered vs demonstrated contact force over the long down-stroke">
+<p>
+<img src="assets/figures/recovered_motion/S3__down_long.gif" width="240">
+<img src="assets/figures/recovered_motion/S2__down_long.gif" width="240">
+<img src="assets/figures/recovered_motion/S1__down_long.gif" width="240">
 </p>
 
 Raw recorded movements for every subject × take × stroke are on the
@@ -37,7 +31,9 @@ Raw recorded movements for every subject × take × stroke are on the
 A **single shared, population-level cost** — recovered from a few shaving cycles
 across three subjects — reproduces human shaving on each subject's own body and
 **predicts held-out demonstrations at ≈ 5.5° mean joint RMSE** (over the eight
-active arm DOFs). The recovered cost is dominated by **motion smoothness** together with a **proximal shoulder-girdle load**; because the pressing force and proximal torque are collinear, that load is identifiable only as a combined effort–force term, and how the force is treated decides what the recovery can claim about it.
+active arm DOFs). The recovered cost is dominated by **proximal shoulder-girdle
+effort** (clavicle and shoulder torque) and **motion smoothness**; how the pressing
+force is treated decides what the recovery can claim about force.
 
 ### Three force treatments
 
@@ -46,19 +42,19 @@ kinematics, torque, and contact force — against the demonstration:
 
 | Force treatment | Kinematics | Torque | Force |
 |---|---|---|---|
-| Free ($F^2$) | 6.4° | 4.7 N·m | 19.4 N |
-| **Imposed (constraint)** | **6.5°** | **2.2 N·m** | **3.9 N** |
-| Tracked (profile) | 12.0° | 3.3 N·m | 9.1 N |
+| Free ($F^2$) | 3.5° | 3.1 N·m | 11.6 N |
+| **Imposed (constraint)** | **2.7°** | **2.2 N·m** | **3.1 N** |
+| Tracked (profile) | 4.2° | 3.4 N·m | 11.0 N |
 
 - **Free force collapses.** With no force signal in a demonstration that only pins
   the motion, the force weight goes to zero — the recovery fits the joint *angles*
-  but leaves the torque and force the furthest off (it gets the physics wrong).
+  well but leaves the force the furthest off (it gets the physics wrong).
 - **Imposing the measured force is the cleanest recovery.** It resolves the torque
   null-space, giving the best torque and force at unchanged kinematics. We read the
   recovered cost *structure* from these runs.
 - **Tracking the force is the only way to recover a force *weight*.** It carries
-  force as 7–10% of the cost and tracks it to 6–9 N, but at a kinematic cost (12°):
-  fitting the force pulls the wrist off the recorded motion.
+  force as ≈ 8% of the cost at good kinematics (4.2°), but recovers the force only
+  loosely (≈ 11 N) — the force stays weakly identifiable even when tracked.
 
 ![Recovered cost strategy over the stroke](assets/figures/cost_strategy_Ctrack_down.png)
 
@@ -131,7 +127,9 @@ primary take), not a recovery failure. Otherwise the two takes agree to within
 for a 2-cycle split. (Methodology paper, Table IV.)
 
 The agreement is not just in error magnitude but in **cost structure**: on *both*
-takes the running cost shows the same structure, motion smoothness with a proximal clavicle and shoulder load, confirming the cost reflects the
+takes the running cost is dominated by proximal clavicle and shoulder torque plus
+joint-acceleration smoothness — clavicle torque accounts for **15–37%** of the
+running cost per subject on both takes — confirming the cost reflects the
 mechanics of the press, not the recording. The takes differ only in secondary
 terms: the **27_02 take (which carries the force sensor) assigns more of the
 running cost to the press-force term**, as expected when the force channel is
@@ -343,7 +341,7 @@ on what to look for, so the per-combo notes can stay terse:
 Run with the locked CSQP recipe (static stick, fixed contact normal,
 demo-seeded $v_0$, measured force target, K = 10 Gaussian basis, elastic-net
 $\beta = 10^{-3}$, contiguous early cycles 3–5; see
-`papers/csqp_results.md`).
+[`papers/csqp_results.md`](https://github.com/Anastasija42/tool_handling/blob/master/papers/csqp_results.md)).
 $q_{\text{norm}} = $ joint RMSE $+\,0.1\cdot$ force RMSE. "press_force recovered"
 means the contact-force weight climbs off the $10^{-6}$ floor — the hardest
 feature to identify because it lives on a near-flat cost direction.

@@ -5,23 +5,21 @@ title: Cross-Morphology
 
 # Cross-morphology analysis of Paleolithic tool use
 
+> The methodology pages recover a cost function from *one* body (a modern human
+> subject). This second thread asks a different question: **hold that human cost
+> fixed and re-solve the same shaving task on other hominin bodies.** Any
+> divergence in behaviour is then attributable to *morphology alone*. Full
+> details in the
+> [morphology paper](https://github.com/Anastasija42/tool_handling/blob/master/papers/morphology_paper.tex).
+
 <p align="center">
   <a href="{{ site.baseurl }}/species_inspector.html"><b>▶ Open the interactive inspector</b></a><br>
   <em>seven bodies on both strokes, the recorded demonstration, and the cost comparison —
   rotate, scrub the stroke, ghost one cost over another</em>
 </p>
 
-> The methodology pages recover a cost function from *one* body (a modern human
-> subject). This second thread asks a different question: **hold that human cost
-> fixed and re-solve the same shaving task on other hominin bodies.** Any
-> divergence in behaviour is then attributable to *morphology alone*. Full
-> details in the
-> morphology paper.
-
 <p align="center">
-<img src="assets/figures/species_mesh/human.gif" width="200" alt="Modern human re-solving the shaving down-stroke">
-<img src="assets/figures/species_mesh/homo_neanderthal.gif" width="200" alt="Neanderthal re-solving the shaving down-stroke">
-<img src="assets/figures/species_mesh/chimp.gif" width="200" alt="Chimpanzee re-solving the shaving down-stroke">
+<img src="assets/figures/species/grid.gif" width="660" alt="Seven hominin upper-limb models — modern human, Neanderthal, H. naledi, A. sediba, A. prometheus, chimpanzee, bonobo — all re-solving the same down-stroke shaving task under one fixed human-recovered cost.">
 </p>
 
 <p align="center"><em>The same human-recovered cost re-solved on seven body plans
@@ -186,13 +184,13 @@ forward transfer (humerus/radius from published specimens; brachial index
 | *A. prometheus* (StW 573) | 290 / 240 | 83 | ~120° | ancestral pre-tool baseline |
 
 <p align="center">
-<img src="assets/figures/species_mesh/human.gif" width="150" alt="Modern human">
-<img src="assets/figures/species_mesh/homo_neanderthal.gif" width="150" alt="Neanderthal">
-<img src="assets/figures/species_mesh/homo_naledi.gif" width="150" alt="H. naledi">
-<img src="assets/figures/species_mesh/chimp.gif" width="150" alt="Chimpanzee">
-<img src="assets/figures/species_mesh/bonobo.gif" width="150" alt="Bonobo">
-<img src="assets/figures/species_mesh/australopithecus_sediba.gif" width="150" alt="A. sediba">
-<img src="assets/figures/species_mesh/australopithecus_prometheus.gif" width="150" alt="A. prometheus">
+<img src="assets/figures/species/human.gif" width="150" alt="Modern human">
+<img src="assets/figures/species/homo_neanderthal.gif" width="150" alt="Neanderthal">
+<img src="assets/figures/species/homo_naledi.gif" width="150" alt="H. naledi">
+<img src="assets/figures/species/chimp.gif" width="150" alt="Chimpanzee">
+<img src="assets/figures/species/bonobo.gif" width="150" alt="Bonobo">
+<img src="assets/figures/species/australopithecus_sediba.gif" width="150" alt="A. sediba">
+<img src="assets/figures/species/australopithecus_prometheus.gif" width="150" alt="A. prometheus">
 </p>
 
 ## Static arm-hold test
@@ -287,9 +285,9 @@ separates the bodies; morphological distance is instead read off two channels:
 per-joint kinematic divergence and the realised cost decomposition.
 
 <p align="center">
-<img src="assets/figures/species_mesh/homo_neanderthal.gif" width="200" alt="Neanderthal down-stroke">
-<img src="assets/figures/species_mesh/chimp.gif" width="200" alt="Chimpanzee down-stroke">
-<img src="assets/figures/species_mesh/homo_naledi.gif" width="200" alt="H. naledi down-stroke">
+<img src="assets/figures/species/homo_neanderthal.gif" width="200" alt="Neanderthal down-stroke">
+<img src="assets/figures/species/chimp.gif" width="200" alt="Chimpanzee down-stroke">
+<img src="assets/figures/species/homo_naledi.gif" width="200" alt="H. naledi down-stroke">
 </p>
 <p align="center"><em>Left to right: Neanderthal (tracks the human at every joint),
 chimpanzee (absorbs the mismatch at the elbow), <em>H. naledi</em> (re-routes
@@ -381,7 +379,7 @@ divergent body on the up-stroke**, overtaking the apes.
   re-routes the limb at the shoulder and elbow *whatever* the contact force.
 
 Return-stroke figures are in `analysis/special/` and the
-morphology paper
+[morphology paper](https://github.com/Anastasija42/tool_handling/blob/master/papers/morphology_paper.tex)
 up-stroke appendix.
 
 ## A two-axis morphospace

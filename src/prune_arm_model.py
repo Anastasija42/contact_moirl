@@ -11,7 +11,7 @@ fixed root), drops every frozen sibling body + all 27 equality constraints, fixe
 the rock collision geom mesh→sphere (MJX has no mesh↔cylinder collision). Result: nv=9, neq=0, MJX
 compiles in ~2GB (K=256,H=30) and runs nan-free even at coarse NSUB. Validated: this file's __main__.
 
-Run: python src/prune_arm_model.py   (writes config/xml_models/13_02/felix_pruned.xml + benchmarks)
+Run: python src/prune_arm_model.py   (writes config/xml_models/13_02/s3_pruned.xml + benchmarks)
 NOTE: the rock→sphere(0.02) and stick-fixed choices are for the MJX-compat smoke test; align the rock
 radius / stick handling with the pipeline when wiring the reduced model into test_phase2.
 """
@@ -98,8 +98,8 @@ def _bake_demo_pose(full_src, pruned_dst, q_full):
 if __name__ == '__main__':
     import mujoco, jax, resource, time, numpy as np
     from mujoco import mjx
-    SRC = 'config/xml_models/13_02/felix_pinned.xml'
-    DST = 'config/xml_models/13_02/felix_pruned.xml'
+    SRC = 'config/xml_models/13_02/s3_pinned.xml'
+    DST = 'config/xml_models/13_02/s3_pruned.xml'
     prune(SRC, DST)
     import sys; sys.path.insert(0, 'src')
     from MPPI_MJX import _prepare_model_for_mjx

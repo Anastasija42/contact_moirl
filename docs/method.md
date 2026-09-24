@@ -5,8 +5,6 @@ title: Method
 
 # Method
 
-*Background — the [toy-box analogy](toy_box_analogy) builds the intuition on a small, fully-known problem before the method is trusted on real demonstrations.*
-
 ## Related Work
 
 **The foundation of IRL.** Ng and Russell first formalized the recovery of
@@ -205,41 +203,52 @@ Features specific to the contact-rich rock-pressing task — these encode "what 
 | **rail_lat** | $\lVert p_{\perp \text{rail}}(t) \rVert^2$ | *Lateral drift from the rail axis*. Penalizes wobbling sideways while pressing — keeps the tool tracking the intended line. |
 | **rock_ori** | rotation deviation from reference | How well the rock's *orientation* (tilt + roll) matches the intended pose. Captures grip discipline / wrist control. |
 
-In addition to `press_force` above, a **surface** feature $\tfrac12\,\mathrm{gap}^2$ penalizes loss of contact (the rock leaving the stick when it should be pressed).
+The contact cost has **two** features: `press_force` above, and **`press_capacity`**
+— the friction-cone / normal-support term, which concerns whether the normal force
+is large enough to supply the tangential friction the scrape demands. `press_capacity`
+is the feature the *tracking* force treatment drops (see
+[Force treatments](#force-treatments-free-imposed-tracked) below). An alternative
+**surface**/gap penalty $\tfrac12\,\mathrm{gap}^2$, penalising loss of contact,
+exists for the MPPI configuration but is not part of the CSQP population library.
 
 All features are normalized to $\mathcal{O}(1)$ so the learned weights directly express *relative importance* — a weight of 0.5 on `Tau` and 0.05 on `press_force` means the demonstrator implicitly prioritized minimizing torque effort 10× more than tracking the target force.
 
-### Per-joint-group split: the 16-feature library
+### Per-joint-group split: the 19-feature library
 
-To localize effort to the body, the **torque (Tau)** and **energy (Eng)**
-features are split per joint group — clavicle, thoracic, shoulder, elbow, and
-wrist — rather than summed over the whole arm. This lets the recovered cost
-distinguish *proximal load* (shoulder torque to hold the arm out) from *distal
-effort* (elbow/wrist torque to drive the scrape). Energy stays split per joint;
-torque collapses to three groups once the
-[identifiability analysis](identifiability) shows the per-segment torque terms
-are collinear (the scraping motion drives the segments through one tightly
-coupled kinematic pattern). The result is the **sixteen-feature** weight vector
-used in the final runs:
+To localize effort to the body, the **torque (Tau)** and **energy (Eng)** features
+are split per joint group — **thoracic, clavicle, shoulder, elbow, wrist** — rather
+than summed over the whole arm. This lets the recovered cost distinguish *proximal
+load* (shoulder/clavicle torque to hold the arm out against the press) from *distal
+effort* (elbow/wrist torque to drive the scrape). The CSQP population runs keep the
+**full five-way split for both Tau and Eng** (`--tau_split full`); the thoracic
+group is present but ≈ 0 because the trunk is locked (`--lock_thorax`). This is the
+**nineteen-feature** vector used in the final runs (exactly the `keys` array written
+by `run_csqp_population_irl.py`):
 
-| Group | Features |
-|-------|----------|
-| Effort / smoothness | Tau (×3 joint groups), Eng (×per-joint), JV, JA, JTC, Geo |
-| Contact | press_force, surface |
-| Task | progress_vel, rail_lat, rock_ori |
+| Group | Features (count) |
+|-------|------------------|
+| Effort (torque) | `Tau_thoracic`, `Tau_clavicle`, `Tau_shoulder`, `Tau_elbow`, `Tau_wrist` (5) |
+| Effort (work) | `Eng_thoracic`, `Eng_clavicle`, `Eng_shoulder`, `Eng_elbow`, `Eng_wrist` (5) |
+| Smoothness | `Geo`, `JV`, `JA`, `JTC` (4) |
+| Contact | `press_force`, `press_capacity` (2) |
+| Task | `progress_vel`, `rail_lat`, `rock_ori` (3) |
 
-> **Relation to the paper's Table I.** The methodology paper specifies the
-> library in its canonical per-step, half-squared form — e.g.
+**Bundling is an interpretation layer, not a collapse in the fit.** The nineteen
+features are all fit; when *reading* the recovered cost we group the torques into
+**proximal** (`Tau_clavicle` + `Tau_shoulder`) and **distal** (`Tau_elbow` +
+`Tau_wrist`) bundles, and the smoothness terms together, because the
+[identifiability analysis](identifiability) shows the per-segment torque terms are
+collinear (the scrape drives the segments through one tightly coupled kinematic
+pattern). `JA` sits near zero throughout and is excluded from the strategy plots.
+
+> **Relation to the paper's Table I.** The methodology paper specifies the library
+> in its canonical per-step, half-squared form — e.g.
 > $\text{Tau}=\tfrac12\lVert\mathbf{u}\rVert^2$,
 > $\text{Eng}=\tfrac12\lVert\mathbf{v}\odot\mathbf{u}\rVert^2$,
 > $\text{Geo}=\tfrac12\,\mathbf{v}^\top\mathbf{M}\mathbf{v}$,
-> $\text{press\_force}=\tfrac12(f_n-f_{\text{ref}})^2$ — with **both** Tau and
-> Eng split into five joint groups (thoracic, clavicle, shoulder, elbow, wrist),
-> giving an eighteen-feature library. The integral / absolute-value forms above
-> are the same features written over the cycle; collapsing Tau to three groups
-> (→ sixteen) is the downstream decision the
-> [identifiability analysis](identifiability) justifies, once the per-segment
-> torque terms turn out collinear.
+> $\text{press\_force}=\tfrac12(f_n-f_{\text{ref}})^2$ — with both Tau and Eng split
+> into the five joint groups above. The integral / absolute-value forms in the
+> tables are the same features written over the cycle.
 
 ### How to read the IRL weights
 
@@ -566,7 +575,7 @@ derivation: `documentation/08_basis_weights.md`.
 
 These choices are what adapt the contact-free MO-IRL framework to a contact-rich
 task. They are shared by the experiments and detailed further in the
-methodology paper.
+[methodology paper](https://github.com/Anastasija42/tool_handling/blob/master/papers/methodology_paper.tex).
 
 ### Friction-augmented actuation (the central modeling device)
 
@@ -613,13 +622,38 @@ set-point and learn the rest. Fixing the goal and learning the style mirrors the
 constrained-OCP path, where task completion is imposed as a **hard constraint**
 rather than a learned cost.
 
-**The normal force is recovered, not imposed.** The $f_{\text{target}}$ above is
-not a fixed constant. By default the normal is left as a **free contact dual** —
-the solve computes the press from the rollout's own torques — and the tangential
-friction $\mu f_n$ reads that *same* back-solved dual, refreshed after each solve
-so friction and normal share one consistent, *recovered* $f_n$. Injecting a fixed
-value is available only as an explicit opt-out; the default everywhere is to use
-the actual normal force the dynamics produce.
+**The normal force is recovered, not imposed** (by default). The $f_{\text{target}}$
+above is not a fixed constant. By default the normal is left as a **free contact
+dual** — the solve computes the press from the rollout's own torques — and the
+tangential friction $\mu f_n$ reads that *same* back-solved dual, refreshed after
+each solve so friction and normal share one consistent, *recovered* $f_n$.
+
+### Force treatments (free / imposed / tracked) {#force-treatments-free-imposed-tracked}
+
+*How much the force itself should be pinned versus recovered* is the open question
+in force-regulated IRL, so the population runs compare **three interchangeable force
+treatments**. All three share the same 19-feature library and the
+friction-augmented actuation; they differ only in how the contact force is
+constrained:
+
+| Treatment | Flags | The contact force is… | `press_capacity` |
+|-----------|-------|-----------------------|:----------------:|
+| **A — free** | `--two_cost_force` | recovered as a free contact dual from the rollout's own torques | kept |
+| **B — imposed** | `--two_cost_force --force_strict_slack_frac 0.15` | held within 15 % of each demo's *measured* force — a per-demo boundary condition | kept |
+| **C — tracked** | `--no_capacity` | tracked toward the measured profile, but *without* the friction-cone capacity term | dropped |
+
+- **A** lets the data decide the press: nothing external pins $f_n$, so the recovered
+  cost has to explain the force through the same torques it explains the motion with.
+- **B** is the honest boundary-condition view — each subject's own recorded force is
+  imposed to within a slack band, so the trajectory cannot cheat the press. This also
+  gives the shared population cost a *per-subject force anchor*.
+- **C** keeps a soft force-tracking objective but removes `press_capacity`, so it
+  tests recovery when the friction-cone coupling between normal and tangential force
+  is not enforced.
+
+Warm-starts differ accordingly: **A** and **C** start from a neutral posture
+(`--warmstart_neutral`); **B** from a lightly-pressing seed (`--warmstart_press 30`).
+The three are the *Free / Imposed / Tracked* columns of the results table.
 
 **Analytic effort Jacobian.** The effort residuals (Tau, Eng) need
 $\partial \tau_{\text{act}}/\partial x$ at every node and every SQP iteration.
@@ -692,4 +726,4 @@ The IRL gradient requires that the same weights produce the same trajectory. MuJ
 
 ---
 
-[Home](.) | [Identifiability](identifiability) | [Cross-Morphology](morphology) | [Results](results) | [Gallery](gallery) | [Code](code)
+[Home](.) | [Identifiability](identifiability) | [Cross-Morphology](morphology) | [Results](results)

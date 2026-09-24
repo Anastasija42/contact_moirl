@@ -26,7 +26,7 @@ ASSETS.mkdir(parents=True, exist_ok=True)
 TABLE_PATH  = Path("docs/ik_fit_table.md")
 
 SESSIONS = ["13_02", "27_02"]
-SUBJECTS = ["S2", "S3", "S1"]
+SUBJECTS = ["s2", "s3", "s1"]
 TASKS    = ["down_long", "down_short", "up_long", "up_short"]
 ARM_MARKERS = ["RSHO", "RELB", "RWRI", "RMWRI", "RHM5"]
 

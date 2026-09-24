@@ -10,13 +10,13 @@ is the run dir suffix without the `csqp_irl__` prefix
 
 Usage:
     # One combo, all runs in it
-    python docs/scripts/record_irl_meshcat.py --combo miras_dl
+    python docs/scripts/record_irl_meshcat.py --combo s2_dl
 
     # Several combos
-    python docs/scripts/record_irl_meshcat.py --combo felix_dl felix_ul miras_dl miras_ul
+    python docs/scripts/record_irl_meshcat.py --combo s3_dl s3_ul s2_dl s2_ul
 
     # Just one specific run
-    python docs/scripts/record_irl_meshcat.py --combo miras_dl --tag csqp_irl__nw3__basis
+    python docs/scripts/record_irl_meshcat.py --combo s2_dl --tag csqp_irl__nw3__basis
 
 Requirements (one-off):
     pip install playwright imageio pillow
@@ -275,7 +275,7 @@ async def _main_async(args):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--combo", nargs="+", required=True,
-                    help="combo name(s) from moirl_config.COMBOS, e.g. miras_dl")
+                    help="combo name(s) from moirl_config.COMBOS, e.g. s2_dl")
     ap.add_argument("--tag", default=None,
                     help="record only this run dir (e.g. csqp_irl__nw3__basis)")
     ap.add_argument("--fps", type=int, default=15)

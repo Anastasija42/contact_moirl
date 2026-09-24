@@ -5,13 +5,13 @@ layout: default
 ## Motivation
 
 <p align="center">
-<img src="assets/figures/motion_previews/S1__27_02__down_long.gif" width="260" alt="Recorded shaving demonstration replayed on subject S1's scaled body model">
-<img src="assets/figures/motion_previews/S2__27_02__down_long.gif" width="260" alt="Recorded shaving demonstration replayed on subject S2's scaled body model">
-<img src="assets/figures/motion_previews/S3__27_02__down_long.gif" width="260" alt="Recorded shaving demonstration replayed on subject S3's scaled body model">
+<img src="assets/figures/recovered_motion/S3__down_long.gif" width="260" alt="Recorded shaving demo (blue) and the rollout under the recovered cost (orange) — S3, long down-stroke">
+<img src="assets/figures/recovered_motion/S2__down_long.gif" width="260" alt="Recorded shaving demo and recovered-cost rollout — S2, long down-stroke">
+<img src="assets/figures/recovered_motion/S1__down_long.gif" width="260" alt="Recorded shaving demo and recovered-cost rollout — S1, long down-stroke">
 </p>
-<p align="center"><em>One long down-stroke of the shaving task, recorded from three
-subjects of different build and replayed on each subject's own scaled body model.
-A single shared cost, learned from a few such cycles, reproduces all three.</em></p>
+<p align="center"><em>A single shared cost, learned from a few cycles, re-solved on
+each subject's own body (orange) lands on the recorded demonstration (blue) — across
+three subjects of different build.</em></p>
 
 Understanding **why** humans move the way they do is central to biomechanics, prosthetics, and archaeology. We collaborate with the [Anthrotopography Lab (Archaeology/Anthropology Prof. Radu Iovita)](https://wp.nyu.edu/csho/research/laboratories/anthrotopography_laboratory/) to study **Paleolithic tool use** — how early humans shaped stone tools by pressing and scraping them against wood.
 
@@ -35,11 +35,8 @@ This project has two complementary parts, each with its own page:
    behavioural divergence is attributable to morphology alone. → [Cross-Morphology](morphology)
 
 <p align="center">
-<img src="assets/figures/species/compare.png" width="820" alt="Joint trajectories, contact force, cost contributions and per-joint divergence for seven hominin upper-limb models re-solving the same shaving stroke under one fixed human cost">
+<img src="assets/figures/species/grid.gif" width="640" alt="Seven hominin upper-limb models re-solving the same shaving stroke under one fixed human cost">
 </p>
-<p align="center"><em>Seven bodies, one fixed human cost: joint trajectories, the
-regulated contact force, where the cost is spent, and how far each body ends up
-from the human solution.</em></p>
 
 The shared cost predicts held-out human demonstrations at a **mean joint RMSE of
 ≈ 5.5°**, and transfers across bodies with a cost penalty that rises monotonically
@@ -83,9 +80,10 @@ The **Crocoddyl forward** approach works well for short, well-defined motions wh
 
 1. **Capture** human scraping motion via motion capture
 2. **Scan** tools and stick in 3D for geometry estimation
-3. **Build** a subject-scaled, torque-driven rigid-body skeletal model (URDF/MuJoCo) — a 9-DOF upper limb, not a muscle model
+3. **Build** a subject-scaled, torque-driven rigid-body skeletal model (URDF/MuJoCo) — a 9-DOF upper limb, not a muscle model (see [The Physical Model](model))
 4. **Estimate** rail path from contact point trajectory
 5. **Optimize** trajectory under current cost weights
 6. **Compare** features between optimized and demonstrated trajectory
 7. **Update** weights via IRL gradient: $\nabla_w \mathcal{L} = \phi_{\text{demo}} - \mathbb{E}_{P(\xi \mid w)}[\phi]$
 8. **Iterate** until convergence
+

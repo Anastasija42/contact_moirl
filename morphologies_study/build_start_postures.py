@@ -11,7 +11,7 @@ hominins have none, so they came out 48-78 deg off while the apes hit 0.
 """
 import argparse, json, os, sys
 import numpy as np
-sys.path.insert(0, '/home/ana/tool_handling/friction_lib/build')
+sys.path.insert(0, os.environ.get('FRICTION_LIB_BUILD', 'friction_lib/build'))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "morphologies_study"))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
 import pinocchio as pin

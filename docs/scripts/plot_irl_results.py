@@ -13,7 +13,7 @@ and produces three figures under docs/assets/figures/:
 
 Run from the repo root after a sweep finishes:
 
-    python docs/scripts/plot_irl_results.py --combo miras_dl
+    python docs/scripts/plot_irl_results.py --combo s2_dl
 
 By default it picks up every csqp_irl__nwN[__basis]/ subdirectory under
 analysis/moirl/<combo>/.
@@ -40,7 +40,7 @@ def _runs_for(combo: str, mode_filter=None, tag_substr=None):
 
     tag_substr: if given, only include directories whose name contains this
     substring. Use to filter to a specific run_id when the combo dir
-    accumulates many sweeps (e.g. tag_substr='felix_0506_1623').
+    accumulates many sweeps (e.g. tag_substr='s3_0506_1623').
     """
     base = ANALYSIS / combo
     if not base.exists():
@@ -629,9 +629,9 @@ def plot_W_modes_compared(combo, runs, out_path, n_w_pref=3):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--combo", required=True, help="combo name (e.g. miras_dl)")
+    ap.add_argument("--combo", required=True, help="combo name (e.g. s2_dl)")
     ap.add_argument("--tag", default=None,
-                    help="substring to filter run dirs by (e.g. 'felix_0506_1623' "
+                    help="substring to filter run dirs by (e.g. 's3_0506_1623' "
                          "to plot only one batch's 4 runs).")
     args = ap.parse_args()
 

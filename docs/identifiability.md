@@ -351,7 +351,7 @@ slope at low $f_n$.
 
 > Figures: `papers/figures/force_normal_justification.png`,
 > `papers/figures/friction_mu_sweep.png`. See the
-> methodology paper
+> [methodology paper](https://github.com/Anastasija42/tool_handling/blob/master/papers/methodology_paper.tex)
 > appendix for the full derivation.
 
 ---

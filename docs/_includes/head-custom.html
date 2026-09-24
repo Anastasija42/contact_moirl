@@ -172,8 +172,9 @@
 document.addEventListener('DOMContentLoaded',function(){
   var hdr=document.querySelector('.page-header'); if(!hdr||document.querySelector('.site-nav')) return;
   var base='{{ site.baseurl }}';
-  // Only the inspector is published while the other pages are under review.
-  var items=[['Inspector','/species_inspector.html'],['Recovery','/recovery']];
+  var items=[['Home','/'],['Toy box','/toy_box_analogy'],['Method','/method'],['Model','/model'],
+    ['Identifiability','/identifiability'],['Planner toy','/reach_planner.html'],['Morphology','/morphology'],
+    ['Results','/results'],['Previews','/motion_previews'],['Gallery','/gallery'],['Code','/code']];
   var path=location.pathname.replace(/\/$/,'').replace(/\.html$/,'');
   var nav=document.createElement('nav'); nav.className='site-nav';
   nav.innerHTML=items.map(function(it){

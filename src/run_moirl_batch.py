@@ -19,7 +19,7 @@ Methods available:
 
 Run:
   python run_moirl_batch.py                          # every combo × every method
-  python run_moirl_batch.py --combos felix_dl
+  python run_moirl_batch.py --combos s3_dl
   python run_moirl_batch.py --methods ocp mppi_vp
   python run_moirl_batch.py --combos all_dl --methods mppi_3phase
 """

@@ -36,7 +36,7 @@ the remaining channel, present only as a soft cost.
 
 Usage (unified_env):
     conda run -n unified_env python run_species_forward.py \
-        --weights analysis/moirl/felix_dl/csqp_irl__nw1__windowed/weights.json \
+        --weights data/weights/recovered_down_long.npz \
         --geom_subject S3 --task down_long --cycle 5 \
         --species human chimp homo_naledi homo_neanderthal \
         --outdir analysis/species_experiments

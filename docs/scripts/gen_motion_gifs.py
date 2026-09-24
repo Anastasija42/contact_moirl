@@ -9,7 +9,7 @@ headless machines.
 
 Run from the repo root:
     python docs/scripts/gen_motion_gifs.py                      # all combos
-    python docs/scripts/gen_motion_gifs.py --ids S3 --dates 27_02
+    python docs/scripts/gen_motion_gifs.py --ids s3 --dates 27_02
     python docs/scripts/gen_motion_gifs.py --cycle 5 --skip-existing
 """
 from __future__ import annotations
@@ -34,7 +34,7 @@ sys.modules["human_mppi"] = _fm_mppi
 from irl_utils_setup import setup_experiment
 from test_models_visual_mujoco import build_mujoco_scene, write_frame, save_gif
 
-IDS      = ["S1", "S2", "S3"]
+IDS      = ["s1", "s2", "s3"]
 DATES    = ["13_02", "27_02"]
 TASKS    = ["up_long", "up_short", "down_long", "down_short"]
 TASK_DIR = {"up_long": "up", "up_short": "up",

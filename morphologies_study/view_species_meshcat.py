@@ -165,7 +165,7 @@ def main():
     ap.add_argument("--geom_subject", default="S3")
     ap.add_argument("--cycle", type=int, default=5)
     ap.add_argument("--weights",
-                    default="analysis/moirl/felix_dl/csqp_irl__nw1__windowed/weights.json")
+                    default="data/weights/recovered_down_long.npz")
     ap.add_argument("--outdir", default="")
     ap.add_argument("--inverse", action="store_true",
                     help="play the hand-authored Experiment-B movements")

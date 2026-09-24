@@ -1,8 +1,4 @@
----
-layout: default
-title: Seven bodies, one cost
----
-
+<title>Seven bodies, one cost — cross-morphology tool-use inspector</title>
 <style>
 :root{
   /* one committed light theme: white ground, neutrals biased a touch warm so the taxon
@@ -15,8 +11,9 @@ title: Seven bodies, one cost
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
 *{box-sizing:border-box}
-.main-content{max-width:1180px !important}
-.wrap{max-width:100%;margin:0;padding:0}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:34px 24px 60px}
 header{margin-bottom:22px}
 .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--accent);margin:0 0 10px}
@@ -83,21 +80,71 @@ footer code{font-family:var(--mono);font-size:11.5px;color:var(--ink)}
 .panelsec{margin-top:26px}
 .sech{font-size:1.05rem;margin:0 0 4px;letter-spacing:-.01em}
 .secp{margin:0 0 12px;color:var(--muted);max-width:74ch;font-size:.9rem}
+
+.backlink{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--hair)}
+.backlink:hover{color:var(--accent);border-bottom-color:var(--accent)}
 </style>
 
 <div class="wrap">
+  <header>
+    <p class="eyebrow"><a class="backlink" href="../morphology">&larr; Cross-morphology analysis</a></p>
+    <p class="eyebrow">Cross-morphology inverse optimal control</p>
+    <h1>Seven bodies, one cost</h1>
+    <p class="lede">Seven hominin and ape upper limbs, one motor cost recovered from a human stone-tool
+    scrape. Each begins with its tool <b>5 cm clear of a defined 20 cm workpiece</b>,
+    approaches in its own way, then scrapes it holding a <b>commanded 40 N</b>. No body is
+    handed the human's trajectory — they share the task, not the movement. All seven complete
+    <b>90–110%</b> of the stroke; what differs is <b>which joint absorbs it</b>.
+    The second panel asks a separate question: how much of the movement comes from the
+    recovered preference rather than the constraints.
+    Drag to rotate, scrub the stroke, switch bodies.</p>
+  </header>
 
   <section class="panelsec" data-panel="morph">
     <h2 class="sech">Seven body plans, the recovered cost</h2>
-    </section>
+    <p class="secp">Each taxon under the cost recovered from the human demonstration. Same rail,
+      same grip, same 40&nbsp;N command; the station is solved per body.</p>
+  </section>
 
   <section class="panelsec" data-panel="demo">
     <h2 class="sech">What was actually recorded</h2>
-    </section>
+    <p class="secp">The demonstration itself &mdash; both strokes, straight from the motion
+      capture with no solve. This is the movement the cost was recovered from, and the
+      reference for judging whether a transferred wrist or elbow posture is plausible.</p>
+  </section>
 
   <section class="panelsec" data-panel="cost">
     <h2 class="sech">Does the cost change the movement?</h2>
-    </section>
+    <p class="secp">The two bodies whose motion the cost moves most. Identical geometry, grip,
+      station and force &mdash; only the preference differs. Switch the cost, or ghost one over
+      another: the tool paths nearly coincide because the constraints get both down the stick,
+      while the arms separate.</p>
+  </section>
+
+  <footer><b>Note:</b> the up-stroke engages contact from the first node, as the demonstration does; the down-stroke still has a 15% free-flight approach, which has no counterpart in the recording. <b>The two strokes are not comparable in this build:</b> the up-stroke is current &mdash; fixed stick at the demonstrated length, contact from the first node as the recording has it, every body starting from the same solved whole-chain posture with the tool grazing the surface and the trunk held still. The down-stroke is an older configuration: it still carries a per-body stick shift we have since found faulty, a 15% free-flight approach with no counterpart in the demonstration, and start postures with a joint on its limit. Read the up-stroke; the down-stroke is pending a re-run. <b></b> its Neutral and +&nbsp;rock_ori runs are still on the earlier 20&nbsp;cm rail while Recovered is on the demonstrated one, so ghosting one over another there compares workpieces, not costs. Panels 1 and 2 are consistent. <b>Panel 1</b> — every body under the cost recovered from the demonstration
+    (pooled imposed-force recovery, treatment B), on both strokes. <b>Panel 2</b> — the
+    demonstration itself, straight from motion capture with no solve: the reference for
+    judging whether a transferred posture is plausible. <b>Panel 3</b> — the same bodies under different costs on identical geometry, with a ghost overlay. Every run shares the start posture, workpiece and constraints of panel 1, so only the cost differs.
+    <br><br>
+    Every run here uses the <b>same warmstart regime as the recovery</b> (each frame chained
+    from that body's own previous IK solution). An earlier styleless-start regime was
+    stricter than the recovery's and inflated divergence from the demonstration roughly
+    fivefold; it also produced a spurious 544&nbsp;N&middot;m torque for the Neanderthal that
+    is 30&nbsp;N&middot;m here. The two strokes use <b>different geometry subjects</b>: the down-stroke is built on one subject's cycle, the up-stroke on another whose recorded stroke is longer (11.9&nbsp;cm vs 9.5), which is why the up-stroke bodies reach demonstration-scale distances. Only the rail geometry, the initial configuration and the grip reference come from that subject &mdash; the cost is the pooled one either way, so no body is asked to reproduce anyone's trajectory. Cross-stroke comparisons carry that caveat. The press is commanded at <b>40&nbsp;N on the down-stroke and 30&nbsp;N on the up</b>. Those are task specifications, not measurements: the
+    demonstrators' own sustained press is ~25&nbsp;N down and ~17&nbsp;N up, and ranges
+    threefold across the three subjects (47/35, 28/18 and 13/15&nbsp;N down/up).
+    <br><br>
+    Each taxon starts holding the cobble at the grip measured from the demonstration &mdash;
+    oblique, 39&deg; from across the stick going down and 52&deg; going up &mdash; matched on
+    the stone's own principal axes. The stick is one rail specification (same direction,
+    20&nbsp;cm, 2&nbsp;cm radius) <b>positioned per body</b>, translated to where that taxon
+    can hold the grip with a straight, static trunk; that station is solved, not tuned.
+    Note the 20&nbsp;cm rail is about double what any subject actually scrapes
+    (7.4&ndash;12.0&nbsp;cm), so travel percentages are against a longer task than the
+    demonstration; where contact begins along the rail is chosen by the solver, which is why
+    the two strokes cover different fractions of it. Metrics are <b>contact phase only</b>,
+    measured along the contact model's own normal. KKT is not reported: it mixes optimality
+    with constraint violation and does not track task quality.</footer>
 </div>
 
 <template id="panelTpl">
@@ -495,3 +542,5 @@ function makeViewer(root, opts){
   });
 })();
 </script>
+
+</body></html>
