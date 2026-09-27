@@ -10,3 +10,7 @@ MUJOCO_LOG.TXT
 
 # run outputs
 runs/
+
+# local jekyll build output
+docs/.sass-cache/
+docs/_site/

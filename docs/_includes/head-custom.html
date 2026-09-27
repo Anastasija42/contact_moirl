@@ -35,31 +35,28 @@
   /* Compact & Modern Header */
   .page-header {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    padding: 4rem 1rem; /* Slightly reduced height */
+    padding: 2.5rem 1rem 0.75rem; /* the nav sits directly under the title */
     text-align: center;
-    border-bottom: 4px solid var(--primary-color);
+    border-bottom: 0; /* the nav carries the accent line */
   }
 
   .page-header h1.project-name {
     font-size: 2.5rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
     color: #ffffff;
   }
+  .page-header h2.project-tagline { margin: 0.25rem 0 0; }
 
-  .page-header h2.project-tagline {
-    font-size: 1.2rem;
-    font-weight: 400;
-    opacity: 0.8;
-    max-width: 700px;
-    margin: 0 auto;
-    color: #cbd5e1;
-  }
+  /* The tagline (site description) shows only on the home page; elsewhere the
+     banner carries just the page name. It still serves as the page description
+     for search engines and link previews everywhere. */
+  {% unless page.url == "/" or page.show_tagline %}.page-header h2.project-tagline { display: none; }{% endunless %}
 
   /* Clean Main Content */
   .main-content {
-    max-width: 800px;
+    max-width: 1180px;
     margin: 0 auto;
     padding: 3rem 1.5rem;
   }
@@ -133,24 +130,9 @@
     color: #475569;
   }
 
-  /* Buttons */
-  .btn {
-    display: inline-block;
-    background: var(--primary-color);
-    color: white !important;
-    padding: 0.8rem 1.5rem;
-    border-radius: 6px;
-    font-weight: 600;
-    margin-top: 1rem;
-    border: none;
-    transition: transform 0.1s;
-  }
-
-  .btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-    text-decoration: none !important;
-  }
+  /* The theme's header buttons ("View on GitHub", downloads) are hidden:
+     the Code page is the way into the repository. */
+  .page-header .btn { display: none; }
 
   /* MathJax spacing */
   .MathJax_Display {
@@ -172,8 +154,7 @@
 document.addEventListener('DOMContentLoaded',function(){
   var hdr=document.querySelector('.page-header'); if(!hdr||document.querySelector('.site-nav')) return;
   var base='{{ site.baseurl }}';
-  // Only the inspector is published while the other pages are under review.
-  var items=[['Inspector','/species_inspector.html'],['Recovery','/recovery']];
+  var items=[['Home','/'],['Code','/code.html'],['Seven bodies, one cost','/species_inspector.html']];
   var path=location.pathname.replace(/\/$/,'').replace(/\.html$/,'');
   var nav=document.createElement('nav'); nav.className='site-nav';
   nav.innerHTML=items.map(function(it){

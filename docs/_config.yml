@@ -1,5 +1,5 @@
-title: "Minimal-Observation IRL for Contact-Sustained Manipulation"
-description: "Recovering a force-regulated motor cost from human demonstrations with analytical and sampling solvers, then transferring it across seven hominin bodies."
+title: "Learning Tool Handling from Human Demonstrations"
+description: "Inverse reinforcement learning for sustained-contact manipulation, and the recovered cost re-solved across seven hominin bodies."
 remote_theme: pages-themes/cayman@v0.2.0
 baseurl: "/contact_moirl"
 url: ""
@@ -8,27 +8,13 @@ plugins:
 
 header_pages:
   - species_inspector.html
-  - recovery.md
-
-# --- pages withheld pending review -------------------------------------
-# Only species_inspector.html is published for now. Jekyll skips everything
-# listed here, so these pages are not built and not reachable by URL.
-# To bring a page back, delete its line.
-exclude:
-  - arm_inspector.html
   - code.md
-  - csqp_contact_cost_slowness.md
-  - gallery.md
-  - identifiability.md
-  - ik_analysis.md
-  - ik_fit_table.md
-  - index.md
-  - method.md
-  - morphology.md
-  - motion_previews.md
-  - notes.md
-  - ocp_inspector.html
-  - reach_planner.html
-  - redundancy_case_study.html
-  - results.md
-  - toy_box_analogy.md
+
+# The published site is the code page and the cross-morphology viewer. Only
+# build files are excluded; there are no withheld pages left.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - serve.sh
+  - serve_old.sh
+  - vendor

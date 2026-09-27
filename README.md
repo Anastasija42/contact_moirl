@@ -18,6 +18,9 @@ attributable to morphology alone.
 The three human demonstrators are anonymized as **S1 / S2 / S3**, ordered by how
 hard they pressed (14 N / 28 N / 47 N).
 
+The seven transferred bodies can be inspected in the browser, without running
+anything: <https://anastasija42.github.io/contact_moirl/species_inspector.html>.
+
 ## Setup
 
 Three steps, once. Python 3.10 in a conda environment called `unified_env`:
@@ -121,4 +124,4 @@ python morphologies_study/render_species_mesh_video.py --task down_long \
 | `config/` | Scaled per-subject models, marker mappings, anthropometry, and the pinned and pruned MuJoCo models. |
 | `human_model/` | The base human URDF, meshes and tool geometry, plus the generated species URDFs and meshes. |
 | `friction_lib/` | The C++ friction model (`friction_model.cpp`, `CMakeLists.txt`); see Setup. |
-| `docs/` | The project site (GitHub Pages), built from this directory. |
+| `docs/` | The project site: this page's companion and the interactive cross-morphology viewer, served at <https://anastasija42.github.io/contact_moirl/>. |

@@ -3,155 +3,48 @@ layout: default
 title: Code
 ---
 
-# Code map
+# Code
 
-Everything on this site is reproducible from the
-**`tool_handling` repository**.
-This page maps the repo onto the methods and experiments described in the rest of
-the site, so you can jump from a result to the code that produced it.
+The released repository is
+[**Anastasija42/contact_moirl**](https://github.com/Anastasija42/contact_moirl).
+Its README covers installation; this page says what is in it and what each
+entry point reproduces.
 
-The library lives in `src/`
-(installed editable, imported as top-level modules).
-`experiments/`
-holds standalone drivers,
-`results/` the
-figure producers,
-`morphologies_study/`
-the cross-species application,
-`papers/` the two
-LaTeX papers, and
-`docs/` this site.
+## Three entry points
 
-## Getting started
+| Command | What it reproduces |
+|---|---|
+| `./experiments/run_recovery.sh <stroke> <A/B/C>` | The gradient-based (CSQP) cost recovery for S1, S2, S3 and the pooled cost, under the free / imposed / tracked force treatment. |
+| `./experiments/run_harness.sh <s1/s2/s3>` | The sampling recovery: an operational-space rollout with the virtual press impedance, and MO-IRL on the reduced arm. |
+| `./morphologies_study/run_transfer.sh <stroke>` | The cross-morphology transfer: the recovered human cost re-solved on the seven bodies, which is what the [viewer](species_inspector.html) shows. |
 
-Run from the repo root inside the `unified_env` conda environment (Python 3.10):
+Each entry point carries the published configuration as its own defaults and
+prints the values it injects, so a bare run is the reference run.
 
-```bash
-pip install -e .
-python tests/test_models_load.py        # smoke-test the models load
-python src/run_moirl_batch.py           # primary IRL batch driver
-```
-
----
-
-## 1. Core IRL / MO-IRL machinery
-
-The outer loop, feature library, and weight optimization → [Method](method).
-
-| File | Role |
-|------|------|
-| `src/MO_IRL.py` | Main multi-objective IRL solver; windowed + Gaussian-basis time-varying weights $W(t)$, exact or MPPI gradients, multi-subject models |
-| `src/IRL.py` | Base IRL solver, log-likelihood gradient, `make_gradient_mask` |
-| `src/IRL_utils.py` | `LogLikelihood` and IRL helper objects |
-| `src/irl_utils_setup.py` | IRL setup helpers incl. `load_smoothed_force_profile` |
-| `src/Optimization_utils.py` | `Optimizer` wrapper (line search, L-BFGS, step schedules) |
-| `src/cost_features.py` | Crocoddyl residual models defining the feature library |
-| `src/moirl_config.py` | Combo + method definitions consumed by the batch driver |
-| `src/irl_phases.py` | Clean two-phase CPU-MPPI IRL (task then style weights) |
-| `src/irl_viz.py` | Weight-evolution / feature-signal / convergence plots |
-
-## 2. Inner solver A — Crocoddyl / CSQP optimal control
-
-The analytical contact-aware OCP → [Method — Crocoddyl forward](method#1-crocoddyl-forward).
-
-| File | Role |
-|------|------|
-| `src/final_models/human_crocoddyl.py` | `HumanCrocoddyl`: production 9-DOF contact-aware CSQP solver |
-| `src/final_models/human_base.py` | `HumanBase`: shared logic for the model classes (incl. `get_traj_features`) |
-| `src/model_ocp.py` | `HumanOCP`: two-phase OCP (contact + free follow-through) |
-| `src/model_stick_forces_1D.py` and siblings | Crocoddyl model builders (arm + stick + rock contact, force residuals) |
-| `friction_lib/` | Compiled `ActuationModelFriction` ($\tau = u + J_c^\top f_\text{fric}$) |
-
-## 3. Inner solver B — MPPI (CPU + MJX / MuJoCo)
-
-The sampling solver with native contact → [Method — MuJoCo + MPPI](method#2-mujoco--mppi-physics-simulation).
-
-| File | Role |
-|------|------|
-| `src/mppi_cpu.py` | CPU-only **deterministic** `KinematicMPPI`; canonical `KEYS_RUN` feature ordering |
-| `src/mppi_mjx_kinematic.py` | `KinematicMPPI_MJX`: MJX/JAX port, numerically matched to the CPU version |
-| `src/MPPI_MJX.py` | `MPPIMJXController`: GPU MPPI via MuJoCo MJX (full dynamics) |
-| `src/mppi_twophase.py` | Two-phase MJX MPPI (Jacobian-shaped noise + commanded rail velocity) |
-| `src/final_models/human_mppi.py` | `HumanMPPI`: MPPI wrapper (auto-selects MJX when available) |
-
-## 4. Human arm model: scaling, pinned models, anthropometry, IK
-
-Mocap → model pipeline → [IK & Marker Registration](ik_analysis).
-
-| File / dir | Role |
-|------|------|
-| `src/ik.py` | QP-based inverse kinematics from mocap markers |
-| `src/utils_get_trajectories.py` | Load/scale subject models, extract joint trajectories |
-| `src/utils_slice_trajectories.py` | Slice motion into per-cycle trajectories |
-| `human_model/` | Scaled per-subject + species URDFs, MuJoCo XMLs, tool + limb meshes |
-| `config/` | Marker maps, `subject_anthropometry.json`, per-date scaled URDF/XML model sets |
-| `experiments/run_ik_trajectories.py` · `batch_run_ik.py` | Single / all-subject IK jobs |
-| `experiments/calibrate_scale_models.py` · `calibrate_from_stance.py` | Subject calibration |
-
-## 5. Cross-morphology / species study
-
-The morphology paper's experiments → [Cross-Morphology](morphology). All under
-`morphologies_study/`:
-
-| File | Role |
-|------|------|
-| `generate_species_urdf.py` | Generate per-species URDFs from the human base + `PARAMS` table |
-| `run_species_forward.py` | **Experiment A** — hold human cost $w^\star$ fixed, re-solve on each body |
-| `run_species_inverse.py` | **Experiment B** — recover a per-taxon hypothesis cost, compare to $w^\star$ |
-| `plot_paper_figures.py` | Publication figures (divergence, cost re-partition, reach/force) |
-| `render_forward_videos.py` · `view_species_meshcat.py` | Videos / animations (source of the [Gallery](gallery) clips) |
-
-Generated species assets:
-`human_model/urdf/generated/`.
-
-## 6. Toy box-slide IRL testbed
-
-The known-ground-truth validation problem → [Identifiability — box-slide](identifiability#box-slide-toy-problem).
-
-| File | Role |
-|------|------|
-| `src/toy_box_slide_irl.py` | Minimal MPPI MO-IRL testbed (push + press DOFs, known $w^\star$, two basins) |
-| `src/toy_box_slide_csqp.py` | CSQP/Crocoddyl counterpart (exact-gradient IRL) |
-| `src/toy_feature_analysis.py` | Toy feature-sensitivity / identifiability analysis |
-| `experiments/run_toy_ablation.py` · `run_all.py` | Box-slide ablation drivers (the `--no-press` ablation lives here) |
-
-## 7. Experiment entry points
-
-Drivers a newcomer would actually run (most useful first):
-
-| Script | What it does |
-|--------|--------------|
-| `src/run_moirl_batch.py` | **Primary batch driver** — all combos × methods → `analysis/moirl/` |
-| `src/run_csqp_population_irl.py` | Population IRL: each subject on their own body, one shared $w(t)$ |
-| `src/run_csqp_synthetic_irl.py` | Recover a known $w^\star$ on the CSQP human model |
-| `src/run_csqp_identifiability.py` | KKT / feature-sensitivity identifiability on the 9-DOF model |
-| `experiments/run_mppi_irl.py` | MPPI MO-IRL pipeline for the scraping task (`--use-gpu`) |
-| `experiments/run_mppi_twophase_S3.py` | Reproducible all-feature two-phase MPPI IRL on S3 |
-| `experiments/estimate_friction_mu.py` · `estimate_contact_phase.py` | Friction-$\mu$ and contact-window estimation |
-
-More ablation/diagnostic drivers live throughout
-`experiments/`.
-
-## 8. Analysis, results, figures
-
-`results/` holds the
-figure producers (`irl_analysis.py`, `csqp_traintest.py`, `plot_cost_contrib.py`,
-`run_csqp_recovery_plots.py`, a `streamlit.py` interactive viewer, …);
-`analysis/` holds the
-generated outputs (`analysis/moirl/`, `analysis/special/`, `analysis/posterior/`,
-`contact_windows.json`, `force_scale.json`);
-`tests/` holds smoke /
-consistency scripts.
-
-## 9. Papers and docs
+## Layout
 
 | Path | Contents |
-|------|----------|
-| `papers/methodology_paper.tex` | **Methodology paper** — MO-IRL with force feedback in contact-rich manipulation |
-| `papers/morphology_paper.tex` | **Cross-morphology paper** — Paleolithic tool use via IRL |
-| `documentation/` | Method notes `01_…`–`08_basis_weights.md`, warm-start blending |
-| `docs/` | This GitHub Pages site + its figure-generation scripts |
+|---|---|
+| `src/MO_IRL.py`, `src/IRL.py`, `src/IRL_utils.py`, `src/Optimization_utils.py` | The MO-IRL outer loop: the contrastive update, the feature mask, the time-varying basis weights, the L-BFGS-B step, the line search and the Pareto acceptance. |
+| `src/cost_features.py`, `src/utils_model_residuals.py` | The feature library as Crocoddyl residuals, including the contact-aware effort residuals and their derivatives. |
+| `src/final_models/human_crocoddyl.py`, `src/final_models/human_base.py` | The gradient-based inner solver: the constrained OCP with the moving 1-D rail contact, the friction-augmented actuation and the three force treatments. |
+| `friction_lib/` | The C++ actuation model $\tau = u + J_c^\top f_{\text{fric}}$ and its Jacobians; built locally. |
+| `src/run_csqp_population_irl.py`, `src/csqp_cli.py`, `src/demo_prep.py` | The recovery driver: demonstration preparation, per-subject and population recovery, and replay from the neutral initialisation. |
+| `experiments/mppi_impedance_harness.py`, `src/mppi_cpu.py`, `src/prune_arm_model.py` | The sampling inner solver: a deterministic CPU sampler over MuJoCo, the pruned arm model and the virtual impedance press. |
+| `experiments/plot_gradient_rundown.py`, `experiments/plot_recovery_vs_demo.py`, `experiments/plot_friction_estimate.py` | The recovery figures, and the normal-force approximation with the effective friction coefficient taken from the force-sensor slices. |
+| `morphologies_study/generate_species_urdf.py` | The seven bodies, generated from the human base and the parameter table. |
+| `morphologies_study/run_species_forward.py`, `build_start_postures.py` | The transfer: the fixed cost re-solved on each body, with the task placement and the start-posture rules. |
+| `morphologies_study/plot_paper_figures.py`, `plot_joint_trajectories.py`, `plot_cost_panels.py`, `plot_species_embedding.py`, `render_species_mesh_video.py` | The morphology figures and the textured-mesh renders. |
+| `data/` | The recovered cost per stroke (`weights/`), the start postures, the sampler's setup dump and demonstration, the contact windows and the force scales. |
+| `trajectories_from_mocap/` | The joint-angle trajectories fitted to the recordings, per subject, session and stroke, with the per-cycle force-sensor slices. |
+| `config/`, `human_model/` | The per-subject scaled models, and the base human model with the generated species URDFs and meshes. |
+| `docs/` | This site: this page and the viewer. |
 
----
+## Not in the release
 
-[Home](.) | [Method](method) | [Identifiability](identifiability) | [Cross-Morphology](morphology) | [Results](results) | [Gallery](gallery)
+The motion-capture fitting pipeline, the toy studies and identifiability
+ablations, and the exploratory tooling around the transfer (the earlier
+sampling pipeline, the meshcat viewers, the species-inverse experiment) are
+kept in the working repository. The trajectories the release ships are that
+pipeline's output. The recordings themselves are not released, and participants
+appear only as S1, S2 and S3.
