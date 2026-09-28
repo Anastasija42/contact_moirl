@@ -1,5 +1,5 @@
-title: "Learning Tool Handling from Human Demonstrations"
-description: "Inverse reinforcement learning for sustained-contact manipulation, and the recovered cost re-solved across seven hominin bodies."
+title: "Contact-rich MO-IRL"
+description: "Recovering motor objectives from contact, without prescribing when it happens."
 remote_theme: pages-themes/cayman@v0.2.0
 baseurl: "/contact_moirl"
 url: ""
@@ -7,6 +7,8 @@ plugins:
   - jekyll-remote-theme
 
 header_pages:
+  - recordings.md
+  - sampler_inspector.html
   - species_inspector.html
   - code.md
 

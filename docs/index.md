@@ -1,38 +1,35 @@
 ---
 layout: default
-title: "Learning Tool Handling from Human Demonstrations"
+title: "Contact-rich MO-IRL"
 show_tagline: true
 ---
 
-## What this is
+## The task
 
-The code and the cross-morphology viewer for two studies of Palaeolithic tool
-use, carried out with the
-[Anthrotopography Lab (Prof. Radu Iovita)](https://wp.nyu.edu/csho/research/laboratories/anthrotopography_laboratory/).
+A person holds a stone and shaves a wooden stick. It is a sustained-contact movement: a controlled
+press against the surface while the tool is drawn along it. From a few recorded cycles we infer the
+motor cost that best explains the movement, then hold that cost fixed and re-solve the same task on a
+different body, so that what changes is attributable to morphology alone.
 
-A person holds a stone and shaves a wooden stick: a sustained-contact movement
-that combines a controlled pressing force with a directed stroke. From a few
-recorded cycles we infer the motor cost that best explains the observed
-movement, capturing the trade-off between effort, smoothness, contact force and
-pace. We then hold that cost fixed and re-solve the same task on a different
-body, so that what changes in the resulting movement is attributable to
-morphology alone.
+What is new is that the contact is not prescribed. When the tool touches the stone, how hard it
+presses and whether it stays loaded are consequences of the motion a candidate objective produces,
+not inputs to the inverse problem.
 
-Three things are published here:
+Work with the [Anthrotopography Lab (Prof. Radu Iovita)](https://wp.nyu.edu/csho/research/laboratories/anthrotopography_laboratory/).
 
-- [**Code**](code.html) is the released repository and what each of its entry points
-  reproduces.
-- [**Contact it was never told about**](sampler_inspector.html) shows the
-  result the method rests on: one recovered objective deployed cold on cycles it
-  never saw, with the contact it produces set against the contact that was
-  recorded. Nothing about when the tool touches the stone was supplied.
-- [**Seven bodies, one cost**](species_inspector.html) is the interactive
-  viewer: the recovered human cost re-solved on seven hominin upper limbs
-  (modern human, Neanderthal, *H. naledi*, *A. sediba*, *A. prometheus*,
-  chimpanzee, bonobo), with the reach, the joint paths and the cost composition
-  each body produces.
+## Pages
 
-The recordings themselves are not released. What the repository ships is what
-the studies are built on: the joint-angle trajectories fitted to the
-recordings, the per-cycle force-sensor slices, the recovered costs, and the
-models. Participants appear only as S1, S2 and S3.
+- [**Recordings**](recordings.html) — what the three participants did, cycle by cycle, and how
+  tightly each joint repeats.
+- [**Contact, discovered**](sampler_inspector.html) — one recovered objective deployed cold on cycles
+  it never saw, with the contact it produces set against the contact that was recorded.
+- [**Seven bodies, one cost**](species_inspector.html) — the recovered human cost re-solved on seven
+  hominin upper limbs, from modern human to bonobo.
+- [**Code**](code.html) — the repository, what each entry point reproduces, and the recovered
+  objective behind every reported number.
+
+## The data
+
+The recordings themselves are not released. What the repository ships is what the results are built
+on: the joint-angle trajectories fitted to them, the per-cycle force-sensor slices, the recovered
+costs and the models. Participants appear only as S1, S2 and S3.
