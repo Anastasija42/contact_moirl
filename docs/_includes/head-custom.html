@@ -154,7 +154,7 @@
 document.addEventListener('DOMContentLoaded',function(){
   var hdr=document.querySelector('.page-header'); if(!hdr||document.querySelector('.site-nav')) return;
   var base='{{ site.baseurl }}';
-  var items=[['Home','/'],['Code','/code.html'],['Seven bodies, one cost','/species_inspector.html']];
+  var items=[['Home','/'],['Code','/code.html'],['Contact discovered','/sampler_inspector.html'],['Seven bodies, one cost','/species_inspector.html']];
   var path=location.pathname.replace(/\/$/,'').replace(/\.html$/,'');
   var nav=document.createElement('nav'); nav.className='site-nav';
   nav.innerHTML=items.map(function(it){

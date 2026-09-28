@@ -18,10 +18,14 @@ pace. We then hold that cost fixed and re-solve the same task on a different
 body, so that what changes in the resulting movement is attributable to
 morphology alone.
 
-Two things are published here, and nothing else:
+Three things are published here:
 
 - [**Code**](code.html) is the released repository and what each of its entry points
   reproduces.
+- [**Contact it was never told about**](sampler_inspector.html) shows the
+  result the method rests on: one recovered objective deployed cold on cycles it
+  never saw, with the contact it produces set against the contact that was
+  recorded. Nothing about when the tool touches the stone was supplied.
 - [**Seven bodies, one cost**](species_inspector.html) is the interactive
   viewer: the recovered human cost re-solved on seven hominin upper limbs
   (modern human, Neanderthal, *H. naledi*, *A. sediba*, *A. prometheus*,
