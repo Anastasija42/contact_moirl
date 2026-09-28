@@ -144,7 +144,7 @@ const SI = {"joints":["clavicle X","shoulder Z","shoulder X","shoulder Y","elbow
     add(d.rec[t], [169,83,29], 0.30);
     add(d.dep[t], [47,110,168], 1);
     const sp=Math.max(hi[0]-lo[0], hi[1]-lo[1])||1, sc=Math.min(AW,AH)*0.78/sp;
-    const ox=AW/2-(lo[0]+hi[0])/2*sc, oy=AH/2+(lo[1]+hi[1])/2*sc;
+    const ox=AW/2+(lo[0]+hi[0])/2*sc, oy=AH/2+(lo[1]+hi[1])/2*sc;
     const S2=q=>[ox-q[0]*sc, oy-q[1]*sc];   // negate screen-x: the view basis is left-handed, which mirrors the right arm
     CX.clearRect(0,0,AW,AH); CX.fillStyle='#faf9f7'; CX.fillRect(0,0,AW,AH);
     const M0=MESH.stick.mat, ax=[M0[2],M0[5],M0[8]], q0=MESH.stick.pos, L=0.45;
