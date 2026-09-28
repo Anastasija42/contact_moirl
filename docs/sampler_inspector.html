@@ -145,7 +145,7 @@ const SI = {"joints":["clavicle X","shoulder Z","shoulder X","shoulder Y","elbow
     add(d.dep[t], [47,110,168], 1);
     const sp=Math.max(hi[0]-lo[0], hi[1]-lo[1])||1, sc=Math.min(AW,AH)*0.78/sp;
     const ox=AW/2-(lo[0]+hi[0])/2*sc, oy=AH/2+(lo[1]+hi[1])/2*sc;
-    const S2=q=>[q[0]*sc+ox, oy-q[1]*sc];
+    const S2=q=>[ox-q[0]*sc, oy-q[1]*sc];   // negate screen-x: the view basis is left-handed, which mirrors the right arm
     CX.clearRect(0,0,AW,AH); CX.fillStyle='#faf9f7'; CX.fillRect(0,0,AW,AH);
     const M0=MESH.stick.mat, ax=[M0[2],M0[5],M0[8]], q0=MESH.stick.pos, L=0.45;
     const e0=S2(view([q0[0]-L*ax[0],q0[1]-L*ax[1],q0[2]-L*ax[2]])), e1=S2(view([q0[0]+L*ax[0],q0[1]+L*ax[1],q0[2]+L*ax[2]]));
@@ -163,7 +163,7 @@ const SI = {"joints":["clavicle X","shoulder Z","shoulder X","shoulder Y","elbow
     CX.fillText(`${Math.round(100*t/(n-1))}% · ${(C[cur].F[t]||0)>4?'in contact':'free'}`, 18, 34);
   }
   CV.addEventListener('pointerdown',e=>{drag=[e.clientX,e.clientY];CV.setPointerCapture(e.pointerId)});
-  CV.addEventListener('pointermove',e=>{if(!drag)return;yaw+=(e.clientX-drag[0])*0.01;
+  CV.addEventListener('pointermove',e=>{if(!drag)return;yaw-=(e.clientX-drag[0])*0.01;
     pit=Math.max(-1.3,Math.min(1.3,pit+(e.clientY-drag[1])*0.01));drag=[e.clientX,e.clientY];drawArm()});
   addEventListener('pointerup',()=>{drag=null});
   $('si-t').addEventListener('input',e=>{ti=+e.target.value;drawArm()});
