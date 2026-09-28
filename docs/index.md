@@ -4,18 +4,22 @@ title: "Contact-rich MO-IRL"
 show_tagline: true
 ---
 
-## The task
+## Why
 
-A person holds a stone and shaves a wooden stick. It is a sustained-contact movement: a controlled
-press against the surface while the tool is drawn along it. From a few recorded cycles we infer the
+Understanding why humans move the way they do tells us both how the body works and how people
+interacted with tools in the past. Together with the
+[Anthrotopography Lab (Prof. Radu Iovita)](https://wp.nyu.edu/csho/research/laboratories/anthrotopography_laboratory/)
+we study Palaeolithic tool use: the movements by which stone tools were pressed and drawn across other
+materials, and what those movements demanded of the bodies that made them.
+
+The task is a person holding a stone and shaving a wooden stick, a sustained-contact movement that
+combines a controlled pressing force with a directed stroke. From a few recorded cycles we infer the
 motor cost that best explains the movement, then hold that cost fixed and re-solve the same task on a
 different body, so that what changes is attributable to morphology alone.
 
 What is new is that the contact is not prescribed. When the tool touches the stone, how hard it
 presses and whether it stays loaded are consequences of the motion a candidate objective produces,
 not inputs to the inverse problem.
-
-Work with the [Anthrotopography Lab (Prof. Radu Iovita)](https://wp.nyu.edu/csho/research/laboratories/anthrotopography_laboratory/).
 
 ## Pages
 

@@ -20,7 +20,25 @@ whole session, while the distal ones do not: elbow pronation and both wrist axes
 degrees at the same instant of the stroke. And the spread is largest at the start of the cycle, where
 the tool is being placed, and closes as the stroke proceeds.
 
-## Down stroke
+## One cycle each
+
+The recorded cycle replayed on that participant's scaled body model, down stroke, session `13_02`.
+
+| S1 | S2 | S3 |
+|---|---|---|
+| ![S1]({{ site.baseurl }}/assets/motion/S1_down.gif) | ![S2]({{ site.baseurl }}/assets/motion/S2_down.gif) | ![S3]({{ site.baseurl }}/assets/motion/S3_down.gif) |
+
+## How well the model fits the markers
+
+The trajectories come from inverse kinematics on the marker set, in two passes: a full-body fit, then
+an arm-only pass that recovers arm accuracy the full-body fit trades away for the torso and head. A
+good fit is a mean per-marker RMSE under 2 cm, and the capture system's own precision is about 0.5 cm,
+so 1 to 2 cm after IK is what one should expect. Hand and finger markers are the worst, often above
+5 cm, from skin slip and occlusion rather than registration error. Between sessions the absolute joint
+angles differ by a constant offset, because the calibration pose differs, while stroke shape and
+amplitude agree.
+
+## Variability, down stroke
 
 | | |
 |---|---|
@@ -28,7 +46,7 @@ the tool is being placed, and closes as the stroke proceeds.
 | **S2** | ![S2 down]({{ site.baseurl }}/assets/recordings/S2_down.png) |
 | **S3** | ![S3 down]({{ site.baseurl }}/assets/recordings/S3_down.png) |
 
-## Up stroke
+## Variability, up stroke
 
 | | |
 |---|---|
