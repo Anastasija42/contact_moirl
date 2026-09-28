@@ -5,10 +5,13 @@ recover the motor cost behind a sustained-contact demonstration, then carry that
 cost across hominin upper-limb morphologies.
 
 **Recovery.** From a few recorded shaving cycles, recover the weights of a
-biomechanical cost (effort, smoothness, pace, tool attitude) with two independent
-inner solvers — a constrained optimal-control solver (CSQP / Crocoddyl) and a
-sampling MPPI harness (MuJoCo). The contact force is handled as a boundary
-condition on the solver, not as a free variable the cost has to explain.
+biomechanical cost (effort, smoothness, pace, tool attitude). Challengers come
+either from a sampler that generates trajectories through simulated contact, so
+that contact onset, lift-off, re-contact and force vary with the candidate
+objective, or from a constrained optimal-control reference (CSQP / Crocoddyl)
+that is given the demonstrated interaction sequence. Comparing the two is not a
+controlled comparison of optimizers: they differ in contact model,
+parameterization and force features.
 
 **Transfer.** Hold the recovered human cost fixed and re-solve the same task on
 seven upper limbs — modern human, Neanderthal, *H. naledi*, *A. sediba*,
@@ -17,6 +20,9 @@ attributable to morphology alone.
 
 The three human demonstrators are anonymized as **S1 / S2 / S3**, ordered by how
 hard they pressed (14 N / 28 N / 47 N).
+
+**Results.** The recovered objective behind every reported cell is in
+[`results/`](results/), with the table it produces and how to read the weights.
 
 The seven transferred bodies can be inspected in the browser, without running
 anything: <https://anastasija42.github.io/contact_moirl/species_inspector.html>.
@@ -124,4 +130,5 @@ python morphologies_study/render_species_mesh_video.py --task down_long \
 | `config/` | Scaled per-subject models, marker mappings, anthropometry, and the pinned and pruned MuJoCo models. |
 | `human_model/` | The base human URDF, meshes and tool geometry, plus the generated species URDFs and meshes. |
 | `friction_lib/` | The C++ friction model (`friction_model.cpp`, `CMakeLists.txt`); see Setup. |
+| `results/` | The recovered objective behind every reported cell, with the table it produces. |
 | `docs/` | The project site: this page's companion and the interactive cross-morphology viewer, served at <https://anastasija42.github.io/contact_moirl/>. |
