@@ -22,10 +22,8 @@ Work with the [Anthrotopography Lab (Prof. Radu Iovita)](https://wp.nyu.edu/csho
 - [**Recordings**](recordings.html) — what the three participants did, cycle by cycle, and how
   tightly each joint repeats.
 - [**Contact, discovered**](sampler_inspector.html) — one recovered objective deployed cold on cycles
-  it never saw, with the contact it produces set against the contact that was recorded.
-- [**The arm, iteration by iteration**](arm_inspector.html) — the recovery procedure on the full
-  upper body: challenger against demonstration, the sampled posture cloud, the cost field as it
-  develops. From an earlier pipeline, shown for the procedure rather than the numbers.
+  it never saw: the arm in 3D, the contact force, the clearance and the eight joints, each set against
+  the recording.
 - [**Seven bodies, one cost**](species_inspector.html) — the recovered human cost re-solved on seven
   hominin upper limbs, from modern human to bonobo.
 - [**Code**](code.html) — the repository, what each entry point reproduces, and the recovered
